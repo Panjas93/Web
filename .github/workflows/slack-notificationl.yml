@@ -20,7 +20,7 @@ jobs:
       uses: slackapi/slack-github-action@v1.23.0
       with:
     # For posting a rich message using Block Kit
-          channel-id: 'C058K4JRMGR'
+          channel-id: 'C057ZSPJ3U6'
           slack-message : 'SUCCESS'
       env:
           SLACK_BOT_TOKEN : xoxb-5278384501347-5278614073363-n6UIlIS286gSc5QaJBx299eL
