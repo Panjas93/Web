@@ -23,4 +23,4 @@ jobs:
           channel-id: 'C057ZSPJ3U6'
           slack-message : 'SUCCESS'
       env:
-          SLACK_BOT_TOKEN : xoxb-5278384501347-5278614073363-6ICjjHJhyVF4egXyeVcjUzH8
+          SLACK_BOT_TOKEN : xoxb-5278384501347-5291662928209-kRtgT2srg07qlRCUJfiGglt1
