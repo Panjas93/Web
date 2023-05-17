@@ -1,4 +1,5 @@
-on: [push]
+on: 
+   workflow_dispatch:
 
 jobs:
   new_push_job:
@@ -9,7 +10,7 @@ jobs:
       id: slack
       uses: slackapi/slack-github-action@v1.23.0
       with:
-        channel-id: 'SLACK_CHANNEL_ID' # ID of Slack Channel you want to post to
+        channel-id: 'C058K4JRMGR' # ID of Slack Channel you want to post to
         payload: "{\"text\": \"posting from a github action\"}"
       env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        SLACK_BOT_TOKEN: xoxb-5278384501347-5281891454212-OuSwUta3tALGaVpoPFEde63r
