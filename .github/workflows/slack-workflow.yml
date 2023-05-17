@@ -13,4 +13,4 @@ jobs:
         channel-id: 'C058K4JRMGR' # ID of Slack Channel you want to post to
         payload: "{\"text\": \"posting from a github action\"}"
       env:
-        SLACK_BOT_TOKEN: xoxb-5278384501347-5292112213217-mA5IBabFB0o03TDlQY4gHNyX
+        SLACK_BOT_TOKEN: xoxb-5278384501347-5292112213217-YBjQmdRgVhTpnCmdHDG1AAPO
