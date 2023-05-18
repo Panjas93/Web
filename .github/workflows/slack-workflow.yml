@@ -34,7 +34,7 @@ jobs:
       uses : technote-space/workflow-conclusion-action@v3
     - name: Iterate
       run: | 
-           for item in ${{fromJSON(steps.workflow_conclusion.outputs).Jobs }}; do
+           for item in ${{steps.workflow_conclusion.outputs.Jobs }}; do
             echo "Processing item: $item"
             
             # Perform any desired actions with the current item in the loop
