@@ -9,12 +9,19 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       
-    - name: Check if JSON file exists
+    - name: Check if version.json file exists
       id: check-file
       uses : andstor/file-existence-action@v2
       with:
           files: "version.json"
-
+          
+    - name: Read version.json
+      id: version
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: ../../version.json    
+    - name: Echo package.json
+      run: echo "${{ steps.version.outputs.content }}"
     - name: Send GitHub trigger payload to Slack Workflow Builder
       id: slack
       uses: slackapi/slack-github-action@v1.23.0
