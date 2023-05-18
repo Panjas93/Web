@@ -45,7 +45,7 @@ jobs:
                           {
                             "title": "Status",
                             "short": true,
-                            "value": "${{jobs.conclusion}}"
+                            "value": "${{github.workflow.jobs.conclusion}}"
                           }
                         ]
                       }
