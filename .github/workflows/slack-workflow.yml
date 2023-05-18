@@ -2,9 +2,17 @@ on:
    workflow_dispatch:
 
 jobs:
+  post_message:
+    runs-on: ubuntu-latest
+    name: Console Message
+    steps:
+    - name: Print
+    - run: |
+           echo "Hellow World"
   new_push_job:
     runs-on: ubuntu-latest
     name: New push to repo
+    needs : [post_message]
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
