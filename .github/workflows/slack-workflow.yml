@@ -6,9 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Console Message
     steps:
-    - name: Print
-    - run: |
-           echo "Hellow World"
+      - run: echo "Hello World"
+        shell : bash
   new_push_job:
     runs-on: ubuntu-latest
     name: New push to repo
