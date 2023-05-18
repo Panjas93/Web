@@ -33,14 +33,16 @@ jobs:
       id: workflow_conclusion 
       uses : technote-space/workflow-conclusion-action@v3
     - name: Iterate
-      run: | 
+    - run: | 
            for item in ${{steps.workflow_conclusion.outputs.Jobs }}; do
-            echo "Processing item: $item"
+            echo "Processing item: ${{steps.workflow_conclusion.outputs}}"
             
             # Perform any desired actions with the current item in the loop
             # For example, you could run a command or call another job.
             # The actual action would depend on your specific use case.
            done
+           
+      shell: bash    
            
     
     - name: Send Slack Success Notification
