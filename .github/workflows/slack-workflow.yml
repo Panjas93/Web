@@ -30,7 +30,7 @@ jobs:
         channel-id: 'C058W67M0SC' # ID of Slack Channel you want to post to
         payload: | 
                  {
-                   "text": "Deployment finished (Completed) ${{toJSON(steps.version.outputs.content.monorepo).monorepo}}",
+                   "text": "Deployment finished (Completed) ${{toJSON(steps.version.outputs.content).monorepo}}",
                    "attachments": [
                       {
                         "pretext": "Deployment finished",
