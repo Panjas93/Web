@@ -22,7 +22,7 @@ jobs:
       with:
         path: version.json    
     - name: Echo package.json
-      run: echo "${{ steps.version.outputs.content }}"
+      run: echo "${{ steps.version.outputs.content.monorepo }}"
     - name: Send GitHub trigger payload to Slack Workflow Builder
       id: slack
       uses: slackapi/slack-github-action@v1.23.0
