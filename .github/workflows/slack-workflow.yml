@@ -11,7 +11,7 @@ jobs:
       
     - name: Check if version.json file exists
       id: check-file
-      uses : andstor/file-existence-action@v2
+      uses : andstor/file-existence-action@v3
       with:
           files: "version.json"
           
