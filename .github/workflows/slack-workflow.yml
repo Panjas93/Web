@@ -21,8 +21,6 @@ jobs:
       uses: juliangruber/read-file-action@v1
       with:
         path: version.json    
-    - name: Echo package.json
-      run: echo "${{ fromJSON(steps.version.outputs.content).monorepo }}"
     - name: Send GitHub trigger payload to Slack Workflow Builder
       id: slack
       uses: slackapi/slack-github-action@v1.23.0
@@ -30,7 +28,7 @@ jobs:
         channel-id: 'C058W67M0SC' # ID of Slack Channel you want to post to
         payload: | 
                  {
-                   "text": "Deployment finished (Completed) ${{toJSON(steps.version.outputs.content).monorepo}}",
+                   "text": "Deployment finished (Completed) ${{ fromJSON(steps.version.outputs.content).monorepo }}",
                    "attachments": [
                       {
                         "pretext": "Deployment finished",
