@@ -11,14 +11,9 @@ jobs:
       
     - name: Check if JSON file exists
       id: check-file
-      run: |
-          if [ -f "../../version.json" ]; then
-            echo "File exists."
-            echo "file-exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "File does not exist."
-            echo "file-exists=false" >> $GITHUB_OUTPUT
-          fi
+      uses : andstor/file-existence-action@v2
+      with:
+          files: "version.json"
 
     - name: Send GitHub trigger payload to Slack Workflow Builder
       id: slack
