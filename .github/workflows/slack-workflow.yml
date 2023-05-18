@@ -30,7 +30,8 @@ jobs:
       if: steps.check-file.outputs.files_exists == 'true'
       uses: juliangruber/read-file-action@v1
       with:
-        path: version.json    
+        path: version.json
+    - uses : technote-space/workflow-conclusion-action@v3    
     - name: Send GitHub trigger payload to Slack Workflow Builder
       id: slack
       uses: slackapi/slack-github-action@v1.23.0
@@ -47,7 +48,7 @@ jobs:
                           {
                             "title": "Status",
                             "short": true,
-                            "value": "${{job.status}}"
+                            "value": "${{env.WORKFLOW_CONCLUSION}}"
                           }
                         ]
                       }
