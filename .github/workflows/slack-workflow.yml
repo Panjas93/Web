@@ -9,16 +9,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       
-    - name: Check if JSON file exists
+    - name: Check if version.json file exists
       id: check-file
-      run: |
-          if [ -s "../../version.json" ]; then
-            echo "File exists."
-            echo "file-exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "File does not exist."
-            echo "file-exists=false" >> $GITHUB_OUTPUT
-          fi
+      uses : andstor/file-existence-action@v2
+      with:
+          files: "version.json"
           
     - name: Read version.json
       id: version
