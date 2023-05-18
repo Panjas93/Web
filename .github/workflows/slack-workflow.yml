@@ -34,7 +34,6 @@ jobs:
     
     - name: Send Slack Success Notification
       if: success()
-      id: slack
       uses: slackapi/slack-github-action@v1.23.0
       with:
         channel-id: 'C058W67M0SC' # ID of Slack Channel you want to post to
@@ -54,6 +53,28 @@ jobs:
                         ]
                       }
                      ]
-                  }        
+                  }
+    - name: Send Slack Failure Notification
+      if: failure()
+      uses: slackapi/slack-github-action@v1.23.0
+      with:
+         channel-id: 'C058W67M0SC' # ID of Slack Channel you want to post to
+         payload: |
+                  {
+                    "text": "Hey <!subteam^S014W2U4MPY>",
+                    "attachments" : [
+                      {
+                        "pretext": "",
+                        "color": "FF0000",
+                        "fields": [
+                          {
+                            "title": "Deployment",
+                            "short": true,
+                            "value": "FAIL"
+                          }
+                        ]
+                      }
+                    ]
+                  }
       env:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
