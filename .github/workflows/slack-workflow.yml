@@ -12,7 +12,7 @@ jobs:
     - name: Check if JSON file exists
       id: check-file
       run: |
-          if [ -f "version.json" ]; then
+          if [ -s "version.json" ]; then
             echo "File exists."
             echo "file-exists=true" >> $GITHUB_OUTPUT
           else
