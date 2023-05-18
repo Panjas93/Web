@@ -42,7 +42,7 @@ jobs:
                    "text": "Hey <!subteam^S014W2U4MPY>",
                    "attachments": [
                       {
-                        "pretext": "WebApp ${{ fromJSON(steps.version.outputs.content).monorepo }} is in Staging",
+                        "pretext": "_WebApp${{ fromJSON(steps.version.outputs.content).monorepo }}_ is in Staging",
                         "color": "28a745",
                         "fields": [
                           {
