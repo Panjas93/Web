@@ -45,11 +45,14 @@ jobs:
                           {
                             "title": "Status",
                             "short": true,
-                            "value": "${{github.workflow.jobs}}"
+                            "value": "${{job.status}}"
                           }
                         ]
                       }
                      ]
                   }
+    - name: Test
+      run: echo "${{github.workflow}}"
+      shell : bash            
       env:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
