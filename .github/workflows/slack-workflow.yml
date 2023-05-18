@@ -35,7 +35,7 @@ jobs:
     - name: Iterate
       run: | 
             echo "Workflow Name: ${{ github.workflow }}"
-            echo "Event Name: ${{ github.events.workflow_dispatch }}"
+            echo "Event Name: ${{ github.event.workflow_dispatch }}"
            
     - name: Send Slack Success Notification
       if: ${{env.WORKFLOW_CONCLUSION == 'success'}}
