@@ -34,7 +34,7 @@ jobs:
       uses : technote-space/workflow-conclusion-action@v3
     - name: Iterate
       run: | 
-            echo "Workflow Name: ${{ toJSON(jobs) }}"
+            echo "Workflow Name: ${{ toJSON(needs.post_message.result) }}"
            
     - name: Send Slack Success Notification
       if: ${{env.WORKFLOW_CONCLUSION == 'success'}}
