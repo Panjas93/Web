@@ -29,8 +29,19 @@ jobs:
       uses: juliangruber/read-file-action@v1
       with:
         path: version.json
-        
-    - uses : technote-space/workflow-conclusion-action@v3 
+    - name : Workflow Conclusion
+      id: workflow_conclusion 
+      uses : technote-space/workflow-conclusion-action@v3
+    - name: Iterate
+      run: | 
+           for item in ${{ each in steps.workflow_conclusion.outputs.jobs }}; do
+            echo "Processing item: $item"
+            
+            # Perform any desired actions with the current item in the loop
+            # For example, you could run a command or call another job.
+            # The actual action would depend on your specific use case.
+           done
+           
     
     - name: Send Slack Success Notification
       if: ${{env.WORKFLOW_CONCLUSION == 'success'}}
