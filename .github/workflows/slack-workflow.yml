@@ -52,6 +52,6 @@ jobs:
                      ]
                   }
         -name : "Console Message"
-        run : echo "${{github.workflow.jobs.status}}"
+        run : echo "${{github.workflow}}"
       env:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
