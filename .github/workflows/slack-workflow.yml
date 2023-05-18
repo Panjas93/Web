@@ -33,7 +33,7 @@ jobs:
     - uses : technote-space/workflow-conclusion-action@v3 
     
     - name: Send Slack Success Notification
-      if: success()
+      if: ${{env.WORKFLOW_CONCLUSION}} == 'success'
       env:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
       uses: slackapi/slack-github-action@v1.23.0
@@ -58,7 +58,7 @@ jobs:
                   }
                   
     - name: Send Slack Failure Notification
-      if: failure()
+      if: ${{env.WORKFLOW_CONCLUSION}} == 'failure'
       env:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
       uses: slackapi/slack-github-action@v1.23.0
