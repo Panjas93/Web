@@ -45,11 +45,13 @@ jobs:
                           {
                             "title": "Status",
                             "short": true,
-                            "value": "${{github.workflow.jobs.conclusion}}"
+                            "value": "${{github.workflow.jobs.status}}"
                           }
                         ]
                       }
                      ]
                   }
+        -name : "Console Message"
+        run : echo "${{github.workflow.jobs.status}}"
       env:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
