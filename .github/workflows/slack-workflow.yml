@@ -42,7 +42,6 @@ jobs:
             # The actual action would depend on your specific use case.
            done
            
-      shell: bash    
            
     
     - name: Send Slack Success Notification
