@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Console Message
     steps:
-      - run: echo "Hello World"
+      - run: exit 1
         shell : bash
   slack_notification:
     runs-on: ubuntu-latest
