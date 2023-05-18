@@ -34,6 +34,8 @@ jobs:
     
     - name: Send Slack Success Notification
       if: success()
+      env:
+        SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
       uses: slackapi/slack-github-action@v1.23.0
       with:
         channel-id: 'C058W67M0SC' # ID of Slack Channel you want to post to
@@ -54,8 +56,11 @@ jobs:
                       }
                      ]
                   }
+                  
     - name: Send Slack Failure Notification
       if: failure()
+      env:
+        SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
       uses: slackapi/slack-github-action@v1.23.0
       with:
          channel-id: 'C058W67M0SC' # ID of Slack Channel you want to post to
@@ -76,5 +81,3 @@ jobs:
                       }
                     ]
                   }
-      env:
-        SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
