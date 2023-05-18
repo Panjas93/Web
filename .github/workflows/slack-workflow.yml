@@ -11,6 +11,7 @@ jobs:
   new_push_job:
     runs-on: ubuntu-latest
     name: New push to repo
+    if: always()
     needs : [post_message]
     steps:
     - name: Checkout repository
@@ -44,7 +45,7 @@ jobs:
                           {
                             "title": "Status",
                             "short": true,
-                            "value": "Completed"
+                            "value": ${{job.status}}
                           }
                         ]
                       }
