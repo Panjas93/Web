@@ -15,7 +15,7 @@ jobs:
     needs : [post_message]
     steps:   
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       
     - name: Check if version.json file exists
       id: check-file
