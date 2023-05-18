@@ -8,9 +8,9 @@ jobs:
     steps:
       - run: echo "Hello World"
         shell : bash
-  new_push_job:
+  slack_notification:
     runs-on: ubuntu-latest
-    name: New push to repo
+    name: Post Slack Notification
     if: always()
     needs : [post_message]
     steps:   
@@ -32,7 +32,8 @@ jobs:
         
     - uses : technote-space/workflow-conclusion-action@v3 
     
-    - name: Send Slack Notification
+    - name: Send Slack Success Notification
+      if: success()
       id: slack
       uses: slackapi/slack-github-action@v1.23.0
       with:
@@ -46,9 +47,9 @@ jobs:
                         "color": "28a745",
                         "fields": [
                           {
-                            "title": "Status",
+                            "title": "Deployment",
                             "short": true,
-                            "value": "${{env.WORKFLOW_CONCLUSION}}"
+                            "value": "SUCCESS"
                           }
                         ]
                       }
