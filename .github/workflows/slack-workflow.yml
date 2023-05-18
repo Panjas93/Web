@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Console Message
     steps:
-      - run: echo "Hello World"
+      - run: exit 1
         shell : bash
   new_push_job:
     runs-on: ubuntu-latest
