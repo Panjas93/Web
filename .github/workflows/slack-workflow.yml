@@ -36,7 +36,7 @@ jobs:
               -H "Authorization: Bearer ${{github.token}}"\
               https://api.github.com/repos${{github.owner}}/${{github.repository}}/actions/runs/${{github.run_id}}/jobs
     - name : Print
-      run : echo "${{toJSON(steps.jobs.outputs)}}"
+      run : echo "${{github.event.workflow_run}}"
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
