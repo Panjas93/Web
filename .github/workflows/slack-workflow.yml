@@ -1,3 +1,4 @@
+name : Slack Notification Workflow
 on: 
    workflow_run: 
      workflows : ['Release Workflow']
@@ -5,17 +6,10 @@ on:
        - completed
 
 jobs:
-  post_message:
-    runs-on: ubuntu-latest
-    name: Console Message
-    steps:
-      - run: exit 1
-        shell : bash
+
   slack_notification:
     runs-on: ubuntu-latest
     name: Post Slack Notification
-    if: always()
-    needs : [post_message]
     steps:   
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -35,10 +29,7 @@ jobs:
     - name : Workflow Conclusion
       id: workflow_conclusion 
       uses : technote-space/workflow-conclusion-action@v3
-    - name: Iterate
-      run: | 
-            echo "Workflow Name: ${{ toJSON(needs.post_message) }}"
-           
+    
     - name: Send Slack Success Notification
       if: ${{env.WORKFLOW_CONCLUSION == 'success'}}
       env:
