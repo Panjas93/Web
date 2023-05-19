@@ -10,6 +10,8 @@ jobs:
   slack_notification:
     runs-on: ubuntu-latest
     name: Post Slack Notification
+    permissions:
+         actions : read
     steps:   
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -29,9 +31,12 @@ jobs:
     - name : Jobs API
       id : jobs_id
       run : |
-            curl -X GET ${{github.event.workflow_run.jobs_url}}
+            curl -L \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{github.token}}"\
+              https://api.github.com/repos/${{github.owner}}/${{github.repository}}/actions/runs/${{github.run_id}}/jobs
     - name : Print
-      run : echo "${{toJSON(github.token)}}"
+      run : echo "${{toJSON(jobs_id.outputs)}}"
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
