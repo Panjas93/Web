@@ -29,9 +29,9 @@ jobs:
     - name : Jobs API
       id : jobs_id
       run : |
-            curl -X GET ${{toJSON(github.event.workflow_run.jobs_url)}}
+            curl -X GET ${{github.event.workflow_run.jobs_url}}
     - name : Print
-      run : echo "${{steps.jobs_id.outputs}}"
+      run : echo "${{toJSON(steps.jobs_id.outputs)}}"
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
