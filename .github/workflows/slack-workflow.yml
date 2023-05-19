@@ -26,8 +26,12 @@ jobs:
       uses: juliangruber/read-file-action@v1
       with:
         path: version.json
-    - name : Console Log
-      run : echo "${{toJSON(github.event.workflow_run)}}"
+    - name : Jobs API
+      id : jobs_id
+      run : |
+            curl -X GET ${{github.event.workflow_run.jobs_url}}
+    - name : Print
+      run : echo "${{steps.jobs_id.outputs}}"
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
