@@ -1,0 +1,13 @@
+name : Release Workflow
+
+on:
+  workflow_dispatch
+  
+jobs: 
+  greet:
+    name : Print Message
+    runs-on : ubuntu-latest
+    
+    steps : 
+      - name : Say Hello
+        run: echo "Hello World"
