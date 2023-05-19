@@ -26,9 +26,6 @@ jobs:
       uses: juliangruber/read-file-action@v1
       with:
         path: version.json
-    - name : Workflow Conclusion
-      id: workflow_conclusion 
-      uses : technote-space/workflow-conclusion-action@v3
     
     - name: Send Slack Success Notification
       if: ${{env.WORKFLOW_CONCLUSION == 'success'}}
