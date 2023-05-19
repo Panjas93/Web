@@ -29,14 +29,14 @@ jobs:
       with:
         path: version.json
     - name : Jobs API
-      id : jobs_id
+      id : jobs
       run : |
             curl -L \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{github.token}}"\
               https://api.github.com/repos${{github.owner}}/${{github.repository}}/actions/runs/${{github.run_id}}/jobs
     - name : Print
-      run : echo "${{jobs_id.outputs}}"
+      run : echo "${{steps.jobs.outputs}}"
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
