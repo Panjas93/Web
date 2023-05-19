@@ -28,7 +28,7 @@ jobs:
         path: version.json
     
     - name: Send Slack Success Notification
-      if: ${{env.WORKFLOW_CONCLUSION == 'success'}}
+      if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
       uses: slackapi/slack-github-action@v1.23.0
@@ -53,7 +53,7 @@ jobs:
                   }
                   
     - name: Send Slack Failure Notification
-      if: ${{env.WORKFLOW_CONCLUSION == 'failure'}}
+      if: ${{github.event.workflow_run.conclusion == 'failure'}}
       env:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
       uses: slackapi/slack-github-action@v1.23.0
