@@ -37,7 +37,7 @@ jobs:
               -H "Authorization: Bearer ${{github.token}}"\
               ${{github.event.workflow_run.jobs_url}})
               
-           echo "::set-output name=response::$response" 
+           echo "handle=$response" >> "$GITHUB_OUTPUT"
       shell: bash 
     - name : Response
       run : echo "${{steps.jobs.outputs}}" 
