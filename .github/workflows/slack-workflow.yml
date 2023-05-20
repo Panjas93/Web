@@ -45,6 +45,7 @@ jobs:
       run : |
             jobList = ${{toJSON(steps.jobs_api.outputs.response)}}
             echo "---List--- $jobList"    
+      shell : bash      
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
