@@ -43,7 +43,7 @@ jobs:
             
     - name : Reponse       
       run : |
-            jobs = steps.jobs_api.outputs.response
+            jobs = ${{toJSON(steps.jobs_api.outputs.response)}}
             for ((i=0; i<jobs.length; i++)); do
                   if ((jobs[i].conclusion == 'failure')); then
                   echo "Failed Jobs"
