@@ -38,7 +38,7 @@ jobs:
               ${{github.event.workflow_run.jobs_url}}
              
     - name : Response
-      run : echo "${{steps.jobs_reponse}}" 
+      run : echo "${{toJSON(steps.jobs_reponse)}}" 
     
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
