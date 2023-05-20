@@ -37,10 +37,10 @@ jobs:
               -H "Authorization: Bearer ${{github.token}}"\
               ${{github.event.workflow_run.jobs_url}})
               
-             echo "::set-output name=handle::$response"
+             echo "Response---$response"
              
-    - name : Response
-      run : echo "${{toJSON(steps.jobs_reponse)}}" 
+#     - name : Response
+#       run : echo "${{toJSON(steps.jobs_reponse)}}" 
     
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
