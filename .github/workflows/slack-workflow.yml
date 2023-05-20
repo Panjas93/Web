@@ -43,7 +43,7 @@ jobs:
             
     - name : Reponse       
       run : |
-            jobs_array= $(echo "${{ steps.jobs_api.outputs.response }}")
+            jobs_array= echo "${{ steps.jobs_api.outputs.response }}"
             for job in $jobs_array; do  
             done
               
