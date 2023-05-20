@@ -35,9 +35,9 @@ jobs:
               -X GET \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{github.token}}"\
-              ${{github.event.workflow_run.jobs_url}})
+              ${{github.event.workflow_run.jobs_url}} | jq -c .)
               
-             echo "Response---$response"
+            echo "::set-output name=handle::$response"
              
 #     - name : Response
 #       run : echo "${{toJSON(steps.jobs_reponse)}}" 
