@@ -43,9 +43,10 @@ jobs:
             
     - name : Reponse       
       run : |
-            jobs = ${{toJSON(steps.jobs_api.outputs.response)}}
-            for ((i=0; i<jobs.length; i++)); do
-                  if ((jobs[i].conclusion == 'failure')); then
+            jobList = ${{toJSON(steps.jobs_api.outputs.response)}}
+            echo "---List--- $jobList"
+            for ((i=0; i<jobList.length; i++)); do
+                  if ((jobList[i].conclusion == 'failure')); then
                   echo "Failed Jobs"
                  else
                    echo "$i is odd"
