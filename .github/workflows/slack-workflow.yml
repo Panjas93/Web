@@ -45,7 +45,7 @@ jobs:
       run : |
             my_array= ${{toJSON(steps.jobs_api.outputs.response)}}
             for item in "$my_array"; do
-               echo "$item"
+               echo "$item.url"
             done 
               
       shell : bash      
