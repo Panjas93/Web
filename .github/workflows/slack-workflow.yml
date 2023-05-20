@@ -43,13 +43,9 @@ jobs:
             
     - name : Reponse       
       run : |
-            my_array= ${{toJSON(steps.jobs_api.outputs.response)}}
-            for ((i=0; i<$my_array.length; i++)); do
-                if ((i % 2 == 0)); then
-                  echo "$i is even"
-                else
-                  echo "$i is odd"
-                fi
+            jobs_array= ${{toJSON(steps.jobs_api.outputs.response)}}
+            for job in ${jobs_array[@]}; do
+              echo $job  
             done
               
       shell : bash      
