@@ -39,7 +39,7 @@ jobs:
             echo "handle=$response" >> "$GITHUB_OUTPUT"  
       shell: bash 
     - name : Response
-    - run : echo "${{toJSON(jobs.outputs.handle)}}" 
+      run : echo "${{toJSON(jobs.outputs.handle)}}" 
     
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
