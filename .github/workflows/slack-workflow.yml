@@ -40,7 +40,7 @@ jobs:
            echo "::set-output name=response::$response" 
       shell: bash 
     - name : Response
-      run : echo "${{toJSON(steps.jobs.outputs)}}" 
+      run : echo "${{steps.jobs.outputs}}" 
     
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
