@@ -36,7 +36,8 @@ jobs:
               -X GET \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{github.token}}"\
-              ${{github.event.workflow_run.jobs_url}}
+              "$url"
+      shell: bash       
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
