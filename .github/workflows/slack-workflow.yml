@@ -28,17 +28,15 @@ jobs:
       uses: juliangruber/read-file-action@v1
       with:
         path: version.json
-#     - name : Jobs API
-#       id : jobs
-#       run : |
-#             url = ${{github.jobs_url}}
-#             curl -L \
-#               -X GET \
-#               -H "Accept: application/vnd.github+json" \
-#               -H "Authorization: Bearer ${{github.token}}"\
-#               "$url"
-    - name : Print
-      run : echo "${{toJSON(github.event.workflow_run)}}"
+    - name : Jobs API
+      id : jobs
+      run : |
+            url = ${{github.event.workflow_run.jobs_url}}
+            curl -L \
+              -X GET \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{github.token}}"\
+              "$url"
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
