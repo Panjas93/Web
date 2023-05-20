@@ -31,11 +31,12 @@ jobs:
     - name : Jobs API
       id : jobs
       run : |
+            url = "${{github.jobs_url}}"
             curl -L \
               -X GET \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{github.token}}"\
-              "${{github.jobs_url}}"
+              "$url"
     - name : Print
       run : echo "${{toJSON(github.event.workflow_run)}}"
     - name: Send Slack Success Notification
