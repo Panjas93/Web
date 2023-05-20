@@ -43,8 +43,11 @@ jobs:
             
     - name : Reponse       
       run : |
-            jobList = ${{toJSON(steps.jobs_api.outputs.response)}}
-            echo "---List--- $jobList"    
+            my_array=("apple" "banana" "cherry" "date")
+            for item in "${my_array[@]}"; do
+               echo "$item"
+            done 
+              
       shell : bash      
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
