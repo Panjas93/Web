@@ -31,7 +31,7 @@ jobs:
     - name : Jobs API
       id : jobs_reponse
       run : |
-           response=$(curl -L \
+           response=$(curl -s \
               -X GET \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{github.token}}"\
