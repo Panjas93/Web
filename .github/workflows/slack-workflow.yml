@@ -43,8 +43,10 @@ jobs:
             
     - name : Reponse       
       run : |
-            jobs_array= echo "${{ steps.jobs_api.outputs.response }}"
-            for job in $jobs_array; do  
+            jobs_array= "${{ steps.jobs_api.outputs.response }}"
+            for object in $(echo "$jobs_array" | jq -r '.[] | @base64'); do
+              id=$(echo "$object" | base64 --decode | jq -r '.id')
+              echo "Object id: $id"
             done
               
       shell : bash      
