@@ -31,11 +31,11 @@ jobs:
     - name : Jobs API
       id : jobs
       run : |
-           response=curl -L \
+           response=(curl -L \
               -X GET \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{github.token}}"\
-              "${{github.event.workflow_run.jobs_url}}"
+              "${{github.event.workflow_run.jobs_url}}")
             echo "handle=$response" >> "$GITHUB_OUTPUT"  
       shell: bash 
     - name : Response
