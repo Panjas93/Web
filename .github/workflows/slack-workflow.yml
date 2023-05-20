@@ -44,14 +44,7 @@ jobs:
     - name : Reponse       
       run : |
             jobList = ${{toJSON(steps.jobs_api.outputs.response)}}
-            echo "---List--- $jobList"
-            for ((i=0; i<jobList.length; i++)); do
-                  if ((jobList[i].conclusion == 'failure')); then
-                  echo "Failed Jobs"
-                 else
-                   echo "$i is odd"
-                 fi
-             done    
+            echo "---List--- $jobList"    
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
