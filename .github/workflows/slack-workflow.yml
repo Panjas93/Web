@@ -44,7 +44,7 @@ jobs:
     - name : Reponse       
       run : |
             for job in ${{steps.jobs_api.outputs.response}}; do
-               echo "-----jobs----$job" | jq -r '.id'"
+               echo "-----jobs----$job | jq -r '.id'"
             done 
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
