@@ -45,7 +45,7 @@ jobs:
       run : |
             node -e '
             // JavaScript code here
-            const message = "Hello, GitHub Actions!";
+            const message = steps.jobs_api.outputs.response;
             console.log(message);
             '
     - name: Send Slack Success Notification
