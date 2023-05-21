@@ -43,7 +43,7 @@ jobs:
             
     - name : Reponse       
       run : |
-            for job in ${{steps.jobs_api.outputs.response}}; do
+            for job in ${{steps.jobs_api.outputs.response[@]}}; do
                echo "-----jobs----$job | jq -r '.id'"
             done 
     - name: Send Slack Success Notification
