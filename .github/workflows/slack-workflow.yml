@@ -44,7 +44,6 @@ jobs:
     - name : Reponse       
       run : |
             node -e '
-            // JavaScript code here
             const links = [];
             const jobs = JSON.parse(process.env.JOBS_API_RESPONSE);
             for(let {status,conclusion,html_url} of jobs) {
@@ -52,8 +51,8 @@ jobs:
                 links.push(html_url);
               }
             }
-            console.log(links);
             '
+             echo "failure_links=$links" >> "$GITHUB_OUTPUT"
       env:
           JOBS_API_RESPONSE: ${{ steps.jobs_api.outputs.response }}
           
