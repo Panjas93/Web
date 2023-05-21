@@ -57,6 +57,9 @@ jobs:
              echo "failed_job_link=$failed_job_link" >> "$GITHUB_OUTPUT"
       env:
           JOBS_API_RESPONSE: ${{ steps.jobs_api.outputs.response }}
+      
+    - name : Print
+      run : echo "---Failed Link--- ${{steps.failed_link.outputs.failed_job_link}}"
           
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
