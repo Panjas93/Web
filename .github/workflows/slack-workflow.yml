@@ -43,8 +43,7 @@ jobs:
             
     - name : Reponse       
       run : |
-            jobs_array= "${{steps.jobs_api.outputs.response}}"
-            echo "$jobs_array"
+            echo "${{steps.jobs_api.outputs.response}}"
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
