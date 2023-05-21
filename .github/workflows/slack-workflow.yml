@@ -53,8 +53,8 @@ jobs:
                 failed_job_link = html_url;
               }
             }
+            process.stdout.write(`::set-output name=failed_job_link::${failed_job_link}`)
             '
-             echo "failed_job_link=$failed_job_link" >> "$GITHUB_OUTPUT"
       env:
           JOBS_API_RESPONSE: ${{ steps.jobs_api.outputs.response }}
       
