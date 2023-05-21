@@ -45,8 +45,14 @@ jobs:
       run : |
             node -e '
             // JavaScript code here
-            const message = JSON.parse(process.env.JOBS_API_RESPONSE);
-            console.log(message);
+            const links = [];
+            const jobs = JSON.parse(process.env.JOBS_API_RESPONSE);
+            for(let job of jobs) {
+              if(job.status === 'completed' && jobs.conclusion === 'failure') {
+                links.push(job.html_url);
+              }
+            }
+            console.log(links);
             '
       env:
           JOBS_API_RESPONSE: ${{ steps.jobs_api.outputs.response }}
