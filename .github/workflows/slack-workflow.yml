@@ -95,7 +95,7 @@ jobs:
                     "text": "Hey <!subteam^S014W2U4MPY>",
                     "attachments" : [
                       {
-                        "pretext": ${{steps.failed_link.outputs.failed_job_link}},
+                        "pretext": "${{steps.failed_link.outputs.failed_job_link}}",
                         "color": "FF0000",
                         "fields": [
                           {
