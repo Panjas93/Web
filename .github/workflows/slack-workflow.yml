@@ -43,7 +43,7 @@ jobs:
             
     - name : Reponse       
       run : |
-           jobs="${{ steps.jobs_api.outputs.response }}"
+           jobs="${{ steps.jobs_api.outputs.response }}" | jq -r
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
