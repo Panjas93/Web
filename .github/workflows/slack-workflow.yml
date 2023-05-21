@@ -47,8 +47,8 @@ jobs:
             // JavaScript code here
             const links = [];
             const jobs = JSON.parse(process.env.JOBS_API_RESPONSE);
-            for(let job of jobs) {
-              if(job.status === "completed" && job.conclusion === "failure") {
+            for(let {status,conclusion} of jobs) {
+              if(status === "completed" && conclusion === "failure") {
                 links.push(job.html_url);
               }
             }
