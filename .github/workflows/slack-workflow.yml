@@ -41,18 +41,20 @@ jobs:
               
             echo "::set-output name=response::$response"
             
-    - name : Reponse       
+    - name : Reponse
+      id : failed_link
+      if: ${{github.event.workflow_run.conclusion == 'failure'}}
       run : |
             node -e '
-            const links = [];
+            let failed_job_link;
             const jobs = JSON.parse(process.env.JOBS_API_RESPONSE);
             for(let {status,conclusion,html_url} of jobs) {
               if(status === "completed" && conclusion === "failure") {
-                links.push(html_url);
+                failed_job_link = html_url;
               }
             }
             '
-             echo "failure_links=$links" >> "$GITHUB_OUTPUT"
+             echo "failed_job_link=$failed_job_link" >> "$GITHUB_OUTPUT"
       env:
           JOBS_API_RESPONSE: ${{ steps.jobs_api.outputs.response }}
           
@@ -93,7 +95,7 @@ jobs:
                     "text": "Hey <!subteam^S014W2U4MPY>",
                     "attachments" : [
                       {
-                        "pretext": "",
+                        "pretext": ${{steps.failed_link.outputs.failed_job_link}},
                         "color": "FF0000",
                         "fields": [
                           {
