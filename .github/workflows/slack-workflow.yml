@@ -47,9 +47,10 @@ jobs:
             // JavaScript code here
             const message = JSON.parse(process.env.JOBS_API_RESPONSE);
             console.log(message);
-      env:
-          JOBS_API_RESPONSE: ${{ steps.jobs_api.outputs.response }}      
             '
+      env:
+          JOBS_API_RESPONSE: ${{ steps.jobs_api.outputs.response }}
+          
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
