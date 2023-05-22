@@ -144,7 +144,7 @@ jobs:
                            {
                              "title" : "Branch",
                              "short" : true,
-                             "value" : "${{github.ref}}"
+                             "value" : "${GITHUB_REF#refs/heads/}"
                            }
                         ]
                       }
