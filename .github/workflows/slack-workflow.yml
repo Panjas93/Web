@@ -80,6 +80,11 @@ jobs:
                             "title": "Deployment",
                             "short": true,
                             "value": "SUCCESS"
+                          },
+                          {
+                            "title": "Commit Message",
+                            "short": true,
+                            "value": "${{github.sha}}"
                           }
                         ]
                       }
