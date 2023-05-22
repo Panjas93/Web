@@ -71,6 +71,9 @@ jobs:
             '
       env:
           JOBS_API_RESPONSE: ${{steps.jobs_api.outputs.response}}
+     
+    - name : Print Response
+      run : echo "${{steps.jobs_api.outputs.failed_job}}"
           
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
