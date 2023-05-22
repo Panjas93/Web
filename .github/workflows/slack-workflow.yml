@@ -63,7 +63,7 @@ jobs:
           JOBS_API_RESPONSE: ${{ steps.jobs_api.outputs.response }}
       
     - name : Print
-      run : echo "---Failed Link--- ${{github.sha}}"
+      run : echo "---Failed Link--- ${{github.event.workflow_run}}"
           
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
@@ -71,7 +71,7 @@ jobs:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
       uses: slackapi/slack-github-action@v1.23.0
       with:
-        channel-id: 'C058W67M0SC' # ID of Slack Channel you want to post to
+        channel-id: 'C058W67M0SC' # Test Channel Id
         payload: | 
                  {
                    "text": "Hey <!subteam^S014W2U4MPY>",
@@ -88,19 +88,24 @@ jobs:
                           {
                              "type": "divider"
                            },
-                          {
-                            "title": "Last Commit URL",
-                            "short": true,
-                            "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
-                          },
-                          {
-                             "type": "divider"
-                           },
-                           {
+                            {
                              "title": "Repository",
                              "short": true,
                              "value": "${{github.repository}}"
-                           }
+                           },
+                           {
+                             "title" : "Branch",
+                             "short" : true,
+                             "value" : "${{steps.branch_name.outputs.branch}}"
+                           },
+                           {
+                             "type": "divider"
+                           },
+                           {
+                            "title": "Commit URL",
+                            "short": true,
+                            "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
+                          }
                         ]
                       }
                      ]
@@ -112,7 +117,7 @@ jobs:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
       uses: slackapi/slack-github-action@v1.23.0
       with:
-         channel-id: 'C058W67M0SC' # ID of Slack Channel you want to post to
+         channel-id: 'C058W67M0SC' # test channel id
          payload: |
                   {
                     "text": "Hey <!subteam^S014W2U4MPY>",
