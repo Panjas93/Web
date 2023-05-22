@@ -17,5 +17,8 @@ jobs:
      runs-on : ubuntu-latest
      
      steps : 
+       - name : Fake Step
+         run : echo "Fake Step"
+         
        - name : Manually Failing Jobs
          run : exit 1
