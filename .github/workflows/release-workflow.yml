@@ -10,4 +10,12 @@ jobs:
     
     steps : 
       - name : Say Hello
-        run: exit 1
+        run: echo "Hello There"
+        
+  Fail:
+     name : Failed Job
+     runs-on : ubuntu-latest
+     
+     steps : 
+       - name : Manually Failing Jobs
+         run : exit 1
