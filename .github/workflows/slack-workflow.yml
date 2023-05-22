@@ -53,14 +53,13 @@ jobs:
             let failed_job_link;
             let failed_step;
             const jobs = JSON.parse(process.env.JOBS_API_RESPONSE);
-            console.log("****Jobs Length***", jobs.length);
             for(let {status,conclusion,html_url,steps} of jobs) {
               if(status === "completed" && conclusion === "failure") {
                 failed_job_link = html_url;
               };
               if(steps.length > 0) {
                 for(let step of steps) {
-                  if(step.conclusion === 'failure') {
+                  if(step.conclusion === "failure") {
                     failed_step = step.name;
                   }
                 }
