@@ -50,22 +50,24 @@ jobs:
       if: ${{github.event.workflow_run.conclusion == 'failure'}}
       run : |
             node -e '
-            let failed_job_link;
-            let failed_step;
+            let failed_job = {
+              link : "",
+              step : ""
+            }
             const jobs = JSON.parse(process.env.JOBS_API_RESPONSE);
             for(let {status,conclusion,html_url,steps} of jobs) {
               if(status === "completed" && conclusion === "failure") {
-                failed_job_link = html_url;
+                failed_job.link = html_url;
               };
               if(steps.length > 0) {
                 for(let step of steps) {
                   if(step.conclusion === "failure") {
-                    failed_step = step.name;
+                    failed_job.step = step.name;
                   }
                 }
               }
             }
-            process.stdout.write(`::set-output name=failed_job_link::${failed_job_link}`);
+            process.stdout.write(`::set-output name=failed_job::${failed_job}`);
             '
       env:
           JOBS_API_RESPONSE: ${{steps.jobs_api.outputs.response}}
@@ -164,7 +166,7 @@ jobs:
                            {
                              "title" : "Failed Step",
                              "short" : true,
-                             "value" : "${{steps.failed_job.outputs.failed_step}}"
+                             "value" : "${{steps.failed_job.outputs.failed_job.step}}"
                            },
                            {
                             "type" : "divider"
@@ -172,7 +174,7 @@ jobs:
                            {
                              "title": "Failed Job URL",
                              "short": true,
-                             "value": "${{steps.failed_job.outputs.failed_job_link}}"
+                             "value": "${{steps.failed_job.outputs.failed_job.link}}"
                            }
                         ]
                       }
