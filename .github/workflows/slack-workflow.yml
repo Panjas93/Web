@@ -85,10 +85,18 @@ jobs:
                              "type": "divider"
                            },
                           {
-                            "title": "Commit Message",
+                            "title": "Last Commit URL",
                             "short": true,
                             "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
-                          }
+                          },
+                          {
+                             "type": "divider"
+                           },
+                           {
+                             "title": "Repository",
+                             "short": true,
+                             "value": "${{github.repository}}"
+                           }
                         ]
                       }
                      ]
@@ -106,14 +114,38 @@ jobs:
                     "text": "Hey <!subteam^S014W2U4MPY>",
                     "attachments" : [
                       {
-                        "pretext": "${{steps.failed_link.outputs.failed_job_link}}",
+                        "pretext": "",
                         "color": "FF0000",
                         "fields": [
                           {
                             "title": "Deployment",
                             "short": true,
-                            "value": "FAIL"
-                          }
+                            "value": "FAILED"
+                          },
+                          {
+                             "type": "divider"
+                           },
+                           {
+                             "title": "Repository",
+                             "short": true,
+                             "value": "${{github.repository}}"
+                           },
+                           {
+                             "type": "divider"
+                           },
+                           {
+                             "title": "Failed Job URL",
+                             "short": true,
+                             "value": "${{steps.failed_link.outputs.failed_job_link}}"
+                           },
+                            {
+                             "type": "divider"
+                           },
+                           {
+                             "title" : "Branch",
+                             "short" : true,
+                             "value" : "${{github.ref}}"
+                           }
                         ]
                       }
                     ]
