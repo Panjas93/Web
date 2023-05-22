@@ -45,26 +45,32 @@ jobs:
               
             echo "::set-output name=response::$response"
             
-    - name : Reponse
-      id : failed_link
+    - name : Get Failed Job
+      id : failed_job
       if: ${{github.event.workflow_run.conclusion == 'failure'}}
       run : |
             node -e '
             let failed_job_link;
+            let failed_step;
             const jobs = JSON.parse(process.env.JOBS_API_RESPONSE);
             console.log("****Jobs Length***", jobs.length);
-            for(let {status,conclusion,html_url} of jobs) {
+            for(let {status,conclusion,html_url,steps} of jobs) {
               if(status === "completed" && conclusion === "failure") {
                 failed_job_link = html_url;
+              };
+              if(steps.length > 0) {
+                for(let step of steps) {
+                  if(step.conclusion === 'failure') {
+                    failed_step = step.name;
+                  }
+                }
               }
             }
-            process.stdout.write(`::set-output name=failed_job_link::${failed_job_link}`)
+            process.stdout.write(`::set-output name=failed_job_link::${failed_job_link}`);
+            process.stdout.write(`::set-output name=failed_step::${failed_step}`);
             '
       env:
           JOBS_API_RESPONSE: ${{steps.jobs_api.outputs.response}}
-      
-    - name : Print
-      run : echo "---Failed Link--- ${{toJSON(github.event.workflow_run)}}"
           
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
@@ -86,22 +92,19 @@ jobs:
                             "short": true,
                             "value": "SUCCESS"
                           },
-                          {
-                             "type": "divider"
-                           },
+
                             {
                              "title": "Repository",
                              "short": true,
                              "value": "${{github.repository}}"
                            },
+                         
                            {
                              "title" : "Branch",
                              "short" : true,
                              "value" : "${{steps.branch_name.outputs.branch}}"
                            },
-                           {
-                             "type": "divider"
-                           },
+                          
                            {
                             "title": "Commit URL",
                             "short": true,
@@ -132,30 +135,30 @@ jobs:
                             "short": true,
                             "value": "FAILED"
                           },
-                          {
-                             "type": "divider"
-                           },
+                         
                            {
                              "title": "Repository",
                              "short": true,
                              "value": "${{github.repository}}"
                            },
-                           {
-                             "type": "divider"
-                           },
-                           {
-                             "title": "Failed Job URL",
-                             "short": true,
-                             "value": "${{steps.failed_link.outputs.failed_job_link}}"
-                           },
-                            {
-                             "type": "divider"
-                           },
+                           
                            {
                              "title" : "Branch",
                              "short" : true,
                              "value" : "${{steps.branch_name.outputs.branch}}"
-                           }
+                           },
+                          
+                           {
+                             "title" : "Failed Step",
+                             "short" : true,
+                             "value" : "${{steps.failed_job.outputs.failed_step_link}}"
+                           },
+                           {
+                             "title": "Failed Job URL",
+                             "short": true,
+                             "value": "${{steps.failed_job.outputs.failed_job_link}}"
+                           },
+                           
                         ]
                       }
                     ]
