@@ -134,19 +134,16 @@ jobs:
                             "short": true,
                             "value": "FAILED"
                           },
-                         
                            {
                              "title": "Repository",
                              "short": true,
                              "value": "${{github.repository}}"
                            },
-                           
                            {
                              "title" : "Branch",
                              "short" : true,
                              "value" : "${{steps.branch_name.outputs.branch}}"
                            },
-                          
                            {
                              "title" : "Failed Step",
                              "short" : true,
@@ -156,8 +153,7 @@ jobs:
                              "title": "Failed Job URL",
                              "short": true,
                              "value": "${{steps.failed_job.outputs.failed_job_link}}"
-                           },
-                           
+                           }
                         ]
                       }
                     ]
