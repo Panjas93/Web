@@ -144,7 +144,7 @@ jobs:
                             "value": "FAILED"
                           },
                           {
-                            type : "divider"
+                            "type" : "divider"
                           },
                            {
                              "title": "Repository",
@@ -152,7 +152,7 @@ jobs:
                              "value": "${{github.repository}}"
                            },
                            {
-                            type : "divider"
+                            "type" : "divider"
                           },
                            {
                              "title" : "Branch",
@@ -160,16 +160,16 @@ jobs:
                              "value" : "${{steps.branch_name.outputs.branch}}"
                            },
                            {
-                            type : "divider"
-                          },
+                            "type" : "divider"
+                           },
                            {
                              "title" : "Failed Step",
                              "short" : true,
                              "value" : "${{steps.failed_job.outputs.failed_step}}"
                            },
                            {
-                            type : "divider"
-                          },
+                            "type" : "divider"
+                           },
                            {
                              "title": "Failed Job URL",
                              "short": true,
