@@ -82,6 +82,9 @@ jobs:
                             "value": "SUCCESS"
                           },
                           {
+                             "type": "divider"
+                           },
+                          {
                             "title": "Commit Message",
                             "short": true,
                             "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
