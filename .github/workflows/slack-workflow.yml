@@ -52,7 +52,7 @@ jobs:
             node -e '
             let failed_job_link;
             const jobs = JSON.parse(process.env.JOBS_API_RESPONSE);
-            console.log('****Jobs Length***', jobs.length);
+            console.log("****Jobs Length***", jobs.length);
             for(let {status,conclusion,html_url} of jobs) {
               if(status === "completed" && conclusion === "failure") {
                 failed_job_link = html_url;
