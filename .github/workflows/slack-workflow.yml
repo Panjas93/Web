@@ -67,13 +67,10 @@ jobs:
                 }
               }
             }
-            process.stdout.write(`::set-output name=failed_job::${failed_job}`);
+            process.stdout.write(`::set-output name=failed_job::${JSON.stringify(failed_job)}`);
             '
       env:
           JOBS_API_RESPONSE: ${{steps.jobs_api.outputs.response}}
-     
-    - name : Print Response
-      run : echo "${{toJSON(steps.failed_job.outputs)}}"
           
     - name: Send Slack Success Notification
       if: ${{github.event.workflow_run.conclusion == 'success'}}
@@ -169,7 +166,7 @@ jobs:
                            {
                              "title" : "Failed Step",
                              "short" : true,
-                             "value" : "${{steps.failed_job.outputs.failed_job.step}}"
+                             "value" : "${{toJSON(steps.failed_job.outputs.failed_job).step}}"
                            },
                            {
                             "type" : "divider"
@@ -177,7 +174,7 @@ jobs:
                            {
                              "title": "Failed Job URL",
                              "short": true,
-                             "value": "${{steps.failed_job.outputs.failed_job.link}}"
+                             "value": "${{toJSON(steps.failed_job.outputs.failed_job).link}}"
                            }
                         ]
                       }
