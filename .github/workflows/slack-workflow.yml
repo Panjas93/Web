@@ -61,7 +61,7 @@ jobs:
             process.stdout.write(`::set-output name=failed_job_link::${failed_job_link}`)
             '
       env:
-          JOBS_API_RESPONSE: ${{ steps.jobs_api.outputs.response }}
+          JOBS_API_RESPONSE: ${{ toJSON(steps.jobs_api.outputs.response) }}
       
     - name : Print
       run : echo "---Failed Link--- ${{github.event.workflow_run}}"
