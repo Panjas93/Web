@@ -11,12 +11,4 @@ jobs:
     steps : 
       - name : Say Hello
         run: echo "Hello There"
-        
-  Fail:
-     name : Failed Job
-     runs-on : ubuntu-latest
-     
-     steps : 
-       - name : Fake Step
-         run : exit 1
        
