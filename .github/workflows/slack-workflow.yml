@@ -84,7 +84,7 @@ jobs:
                           {
                             "title": "Commit Message",
                             "short": true,
-                            "value": "${{github.sha}}"
+                            "value": "${{github.repository}}"
                           }
                         ]
                       }
