@@ -90,7 +90,7 @@ jobs:
                           {
                             "title": "Deployment",
                             "short": true,
-                            "value": "SUCCESS"
+                            "value": "Success"
                           },
                           {
                             "type" : "divider"
@@ -142,7 +142,7 @@ jobs:
                           {
                             "title": "Deployment",
                             "short": true,
-                            "value": "FAILED"
+                            "value": "Failed"
                           },
                           {
                             "type" : "divider"
