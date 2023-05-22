@@ -16,6 +16,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       
+    - name: Get Branch Name
+      id: branch_name
+      run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+      
     - name: Check if version.json file exists
       id: check-file
       uses : andstor/file-existence-action@v2
@@ -144,7 +148,7 @@ jobs:
                            {
                              "title" : "Branch",
                              "short" : true,
-                             "value" : "${{ github.ref/refs\/heads\//}}"
+                             "value" : "${{steps.branch_name.outputs.branch}}"
                            }
                         ]
                       }
