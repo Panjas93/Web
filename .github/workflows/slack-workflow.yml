@@ -91,18 +91,27 @@ jobs:
                             "short": true,
                             "value": "SUCCESS"
                           },
+                          {
+                            type : "divider"
+                          },
 
                             {
                              "title": "Repository",
                              "short": true,
                              "value": "${{github.repository}}"
                            },
+                           {
+                            type : "divider"
+                          },
                          
                            {
                              "title" : "Branch",
                              "short" : true,
                              "value" : "${{steps.branch_name.outputs.branch}}"
                            },
+                           {
+                            type : "divider"
+                          },
                           
                            {
                             "title": "Commit URL",
@@ -134,21 +143,33 @@ jobs:
                             "short": true,
                             "value": "FAILED"
                           },
+                          {
+                            type : "divider"
+                          },
                            {
                              "title": "Repository",
                              "short": true,
                              "value": "${{github.repository}}"
                            },
                            {
+                            type : "divider"
+                          },
+                           {
                              "title" : "Branch",
                              "short" : true,
                              "value" : "${{steps.branch_name.outputs.branch}}"
                            },
                            {
+                            type : "divider"
+                          },
+                           {
                              "title" : "Failed Step",
                              "short" : true,
-                             "value" : "${{steps.failed_job.outputs.failed_step_link}}"
+                             "value" : "${{steps.failed_job.outputs.failed_step}}"
                            },
+                           {
+                            type : "divider"
+                          },
                            {
                              "title": "Failed Job URL",
                              "short": true,
