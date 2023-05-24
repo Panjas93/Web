@@ -7,16 +7,12 @@ on:
 
 jobs:
 
-  slack_notification_update:
+  slack_notification:
     runs-on: ubuntu-latest
-    needs : Release Workflow
     name: Notify Slack 
     permissions:
          actions : read
     steps:  
-    - name : Print
-      run : echo "---print----,${{env.SLACK_NOTIFICATION_OUTPUT}}"
-      
     - name : Jobs API
       if: ${{github.event.workflow_run.conclusion == 'failure'}}
       id : jobs_api
@@ -31,27 +27,31 @@ jobs:
             
     - name : Get Failed Job
       id : failed_job
-      if: ${{github.event.workflow_run.conclusion == 'failure'}}
       run : |
             node -e '
-            let failed_job = {
+            let job_reponse = {
               link : "",
-              step : ""
+              step : "",
+              slackTs : ""
             }
             const jobs = JSON.parse(process.env.JOBS_API_RESPONSE);
             for(let {status,conclusion,html_url,steps} of jobs) {
               if(status === "completed" && conclusion === "failure") {
-                failed_job.link = html_url;
+                job_reponse.link = html_url;
               };
               if(steps.length > 0) {
                 for(let step of steps) {
                   if(step.conclusion === "failure") {
-                    failed_job.step = step.name;
+                    job_reponse.step = step.name;
+                  };
+                  
+                  if(step.id === 'notify_slack') {
+                    console.log('---Print Step---', step.outputs)
                   }
                 }
               }
             }
-            process.stdout.write(`::set-output name=failed_job::${JSON.stringify(failed_job)}`);
+            process.stdout.write(`::set-output name=job_reponse::${JSON.stringify(job_reponse)}`);
             '
       env:
           JOBS_API_RESPONSE: ${{steps.jobs_api.outputs.response}}
