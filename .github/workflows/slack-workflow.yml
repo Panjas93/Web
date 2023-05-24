@@ -9,6 +9,7 @@ jobs:
 
   slack_notification:
     runs-on: ubuntu-latest
+    needs : ${{ github.event.workflow_run.workflow }}
     name: Notify Slack 
     permissions:
          actions : read
