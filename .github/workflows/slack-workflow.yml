@@ -2,9 +2,6 @@ name : Slack Notification Workflow
 on: 
    workflow_run: 
      workflows : ['Release Workflow']
-     types:
-       - completed
-       - in_progress
 
 jobs:
 
