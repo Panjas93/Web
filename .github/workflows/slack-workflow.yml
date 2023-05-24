@@ -134,6 +134,7 @@ jobs:
       uses: slackapi/slack-github-action@v1.24.0
       with:
         channel-id: 'C058W67M0SC' # Test Channel Id
+        update-ts : ${{steps.slack_notify.outputs.ts}}
         payload: | 
                  {
                    "text": "Hey <!subteam^S014W2U4MPY>",
