@@ -45,9 +45,8 @@ jobs:
                     job_reponse.step = step.name;
                   };
                   
-                  if(step.id === "notify_slack") {
-                    console.log("---Print Step---", step.outputs)
-                  }
+                    console.log("---Print Step---", step);
+                    console.log("---Step Outputs---", step.outputs);
                 }
               }
             }
