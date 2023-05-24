@@ -9,30 +9,13 @@ jobs:
 
   slack_notification:
     runs-on: ubuntu-latest
-    name: Post Slack Notification
+    name: Notify Slack 
     permissions:
          actions : read
-    steps:   
-    - name: Checkout repository
-      uses: actions/checkout@v3
+    steps:  
+    - name : Print
+      run : echo "---print----,${{toJSON(github.event.workflow_run)}}"
       
-    - name: Get Branch Name
-      id: branch_name
-      run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
-      
-    - name: Check if version.json file exists
-      id: check-file
-      uses : andstor/file-existence-action@v2
-      with:
-          files: "version.json"
-          
-    - name: Read version.json
-      id: version
-      if: steps.check-file.outputs.files_exists == 'true'
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: version.json
-        
     - name : Jobs API
       if: ${{github.event.workflow_run.conclusion == 'failure'}}
       id : jobs_api
@@ -76,7 +59,7 @@ jobs:
       if: ${{github.event.workflow_run.conclusion == 'success'}}
       env:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
-      uses: slackapi/slack-github-action@v1.23.0
+      uses: slackapi/slack-github-action@v1.24.0
       with:
         channel-id: 'C058W67M0SC' # Test Channel Id
         payload: | 
@@ -128,7 +111,7 @@ jobs:
       if: ${{github.event.workflow_run.conclusion == 'failure'}}
       env:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
-      uses: slackapi/slack-github-action@v1.23.0
+      uses: slackapi/slack-github-action@v1.24.0
       with:
          channel-id: 'C058W67M0SC' # test channel id
          payload: |
