@@ -83,10 +83,8 @@ jobs:
                      ]
                   }
     - name : Save Slack Outputs
-      run : |
-              node -e '
-                process.stdout.write(`::set-env name=SLACK_NOTIFICATION_OUTPUT::${JSON.stringify(steps.notify_slack.outputs)}`);
-              '
+      env:
+        SLACK_NOTIFICATION_OUTPUT : ${{steps.notify_slack.outputs}}
   greet:
     name : Print Message
     runs-on : ubuntu-latest
