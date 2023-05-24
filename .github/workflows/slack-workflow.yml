@@ -7,8 +7,9 @@ on:
 
 jobs:
 
-  slack_notification:
+  slack_notification_update:
     runs-on: ubuntu-latest
+    needs : Release Workflow
     name: Notify Slack 
     permissions:
          actions : read
