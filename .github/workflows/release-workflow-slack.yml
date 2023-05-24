@@ -91,4 +91,4 @@ jobs :
          run: echo "Hello !!"
          
        - name : Print Steps
-         run : echo "--steps--${{toJSON(needs.slack_notification_initial.outputs)}}"
+         run : echo "--steps--${{toJSON(needs.slack_notification_initial)}}"
