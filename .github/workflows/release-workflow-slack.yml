@@ -83,8 +83,12 @@ jobs :
                   }
   greet :
      name : Print Message
-    runs-on : ubuntu-latest
+     runs-on : ubuntu-latest
+     needs : [slack_notification_initial]
     
-    steps : 
-      - name : Say Hello
-        run: echo "Hello !!"
+     steps : 
+       - name : Say Hello
+         run: echo "Hello !!"
+         
+       - name : Print Steps
+         run : echo "--steps--${{toJSON(needs.slack_notification_initial.outputs)}}"
