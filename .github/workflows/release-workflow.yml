@@ -84,8 +84,7 @@ jobs:
                   }
     - name : Save Slack Outputs
       run : |
-           output=${{steps.notify_slack.outputs}}
-           output=$(echo "$output" | jq -c .)
+           output=${{steps.notify_slack.outputs | jq -c .}}
            echo "SLACK_NOTIFICATION_OUTPUT=$output" >> $GITHUB_ENV
      
   greet:
