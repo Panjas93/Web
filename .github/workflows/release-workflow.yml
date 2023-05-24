@@ -31,6 +31,7 @@ jobs:
         path: version.json
       
     - name : Notify Slack (InProgress)
+      id : notify_slack
       if: steps.check-file.outputs.files_exists == 'true'
       env:
         SLACK_BOT_TOKEN: ${{secrets.SLACK_BOT_TOKEN}}
@@ -81,7 +82,8 @@ jobs:
                       }
                      ]
                   }
-      
+    - name : Save Slack Outputs
+      run : echo "STEP_OUTPUT=${{steps.notify_slack.outputs}}" >> $GITHUB_ENV
   greet:
     name : Print Message
     runs-on : ubuntu-latest
