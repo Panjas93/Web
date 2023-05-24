@@ -85,7 +85,7 @@ jobs:
     - name : Save Slack Outputs
       run : |
               node -e '
-                process.env.SLACK_NOTIFICATION_OUTPUT = JSON.stringify(steps.notify_slack.outputs)
+                process.env.SLACK_NOTIFICATION_OUTPUT = JSON.stringify({})
               '
   greet:
     name : Print Message
