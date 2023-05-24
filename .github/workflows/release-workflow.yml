@@ -83,7 +83,10 @@ jobs:
                      ]
                   }
     - name : Save Slack Outputs
-      run : echo "SLACK_NOTIFICATION_OUTPUT=${{steps.notify_slack.outputs | jq -c .}}" >> $GITHUB_ENV
+      run : |
+              node -e '
+                process.env.SLACK_NOTIFICATION_OUTPUT = JSON.stringify(steps.notify_slack.outputs)
+              '
   greet:
     name : Print Message
     runs-on : ubuntu-latest
