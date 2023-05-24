@@ -46,7 +46,7 @@ jobs:
                   };
                   
                   if(step.id === 'notify_slack') {
-                    console.log('---Print Step---', step.outputs)
+                    console.log("---Print Step---", step.outputs)
                   }
                 }
               }
