@@ -84,7 +84,7 @@ jobs:
                   }
     - name : Save Slack Outputs
       run : |
-           output=${{toJSON(steps.notify_slack.outputs)}}
+           output=${{steps.notify_slack.outputs.ts}}
            echo "SLACK_NOTIFICATION_OUTPUT=$output" >> $GITHUB_ENV
      
   greet:
