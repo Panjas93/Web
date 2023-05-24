@@ -9,10 +9,30 @@ jobs:
 
   slack_notification:
     runs-on: ubuntu-latest
-    name: Notify Slack 
+    name: Post Slack Notification
     permissions:
          actions : read
-    steps:  
+    steps:   
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Get Branch Name
+      id: branch_name
+      run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+      
+    - name: Check if version.json file exists
+      id: check-file
+      uses : andstor/file-existence-action@v2
+      with:
+          files: "version.json"
+          
+    - name: Read version.json
+      id: version
+      if: steps.check-file.outputs.files_exists == 'true'
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: version.json
+        
     - name : Jobs API
       if: ${{github.event.workflow_run.conclusion == 'failure'}}
       id : jobs_api
@@ -24,35 +44,30 @@ jobs:
               ${{github.event.workflow_run.jobs_url}} | jq -r '.jobs' | jq -c .)
               
             echo "::set-output name=response::$response"
-    - name : "Print"
-      run : echo "Print Workflow ${{github.event.workflow_run.workflow}}"
             
     - name : Get Failed Job
       id : failed_job
+      if: ${{github.event.workflow_run.conclusion == 'failure'}}
       run : |
             node -e '
-            let job_reponse = {
+            let failed_job = {
               link : "",
-              step : "",
-              slackTs : ""
+              step : ""
             }
             const jobs = JSON.parse(process.env.JOBS_API_RESPONSE);
             for(let {status,conclusion,html_url,steps} of jobs) {
               if(status === "completed" && conclusion === "failure") {
-                job_reponse.link = html_url;
+                failed_job.link = html_url;
               };
               if(steps.length > 0) {
                 for(let step of steps) {
                   if(step.conclusion === "failure") {
-                    job_reponse.step = step.name;
-                  };
-                  
-                    console.log("---Print Step---", step);
-                    console.log("---Step Outputs---", step.outputs);
+                    failed_job.step = step.name;
+                  }
                 }
               }
             }
-            process.stdout.write(`::set-output name=job_reponse::${JSON.stringify(job_reponse)}`);
+            process.stdout.write(`::set-output name=failed_job::${JSON.stringify(failed_job)}`);
             '
       env:
           JOBS_API_RESPONSE: ${{steps.jobs_api.outputs.response}}
