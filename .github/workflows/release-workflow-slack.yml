@@ -8,6 +8,11 @@ jobs :
     name:  Slack Initial Notification
     permissions:
        actions : read
+       
+    outputs: 
+      build_version : ${{fromJSON(steps.version.outputs.content).monorepo}}
+      branch : ${{steps.branch_name.outputs.branch}}
+      
     steps:   
     - name: Checkout repository
       uses: actions/checkout@v3
