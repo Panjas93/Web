@@ -100,6 +100,8 @@ jobs :
 
     steps:
       - name: Decide whether the needed jobs succeeded or failed
+        env:
+          JOB_LIST : ${{needs.slack_notification_initial}}
         run : |
            echo "----hiii----,${{toJSON(needs.slack_notification_initial)}}"
         
