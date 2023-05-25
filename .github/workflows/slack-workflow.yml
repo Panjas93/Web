@@ -40,7 +40,7 @@ jobs:
         SLACK_WEBHOOK_URL: "https://password-v2.tpsec.co/show/f332e053ca2457d54fce68e8ae4ad7abcb01e53f5c5058a85e86f3f85e6833f9/TmU0bmppcmxOSUtwbHVVUVJyWXhCdz09/QlduMVlidllpb2p4eWVKWjNFcG5WSlZZdkJicVRxZ3ZlZis2cUlLQTBacz0="
       uses: slackapi/slack-github-action@v1.24.0
       with:
-        channel-id: 'C058W67M0SC' # Test Channel Id
+        channel-id: 'C059HLPGUN8' # Test Channel Id
         payload: | 
                  {
                    "text": "Hey <!subteam^S014W2U4MPY>",
@@ -132,7 +132,7 @@ jobs:
         SLACK_WEBHOOK_URL: "https://password-v2.tpsec.co/show/f332e053ca2457d54fce68e8ae4ad7abcb01e53f5c5058a85e86f3f85e6833f9/TmU0bmppcmxOSUtwbHVVUVJyWXhCdz09/QlduMVlidllpb2p4eWVKWjNFcG5WSlZZdkJicVRxZ3ZlZis2cUlLQTBacz0="
       uses: slackapi/slack-github-action@v1.24.0
       with:
-        channel-id: 'C058W67M0SC' # Test Channel Id
+        channel-id: 'C059HLPGUN8' # Test Channel Id
         update-ts : ${{steps.slack_notify.outputs.ts}}
         payload: | 
                  {
@@ -185,7 +185,7 @@ jobs:
         SLACK_WEBHOOK_URL: "https://password-v2.tpsec.co/show/f332e053ca2457d54fce68e8ae4ad7abcb01e53f5c5058a85e86f3f85e6833f9/TmU0bmppcmxOSUtwbHVVUVJyWXhCdz09/QlduMVlidllpb2p4eWVKWjNFcG5WSlZZdkJicVRxZ3ZlZis2cUlLQTBacz0="
       uses: slackapi/slack-github-action@v1.24.0
       with:
-         channel-id: 'C058W67M0SC' # test channel id
+         channel-id: 'C059HLPGUN8' # test channel id
          update-ts : ${{steps.slack_notify.outputs.ts}}
          payload: |
                   {
