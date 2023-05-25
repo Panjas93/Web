@@ -105,7 +105,7 @@ jobs :
     - name: Decide whether the needed jobs succeeded or failed
       run : |
           node -e '
-            console.log("Hiiiii", JSON.parse(process.env.needs)
+            console.log("Hiiiii", JSON.parse(process.env.JOBS)
           '
       env : 
           JOBS : ${{needs}}
