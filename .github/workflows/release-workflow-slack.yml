@@ -96,7 +96,7 @@ jobs :
          
        - name : Print Jobs
          run : |
-             
-             for job in slack_notification_initial; do
-                echo "Running Job: $job"
-             done  
+             node -e '
+               const jobs = [needs.slack_notification_initial];
+               console.log('**************',jobs.length);
+             '
