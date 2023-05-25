@@ -95,5 +95,10 @@ jobs :
        - name : Say Hello
          run: echo "Hello !!"
          
-       - name : Print Steps
-         run : echo "--steps--${{toJSON(needs.slack_notification_initial)}}"
+       - name : Print Jobs
+         run : |
+             jobs = (slack_notification_initial)
+             
+             for job in "${jobs[@]}"; do
+              echo "Running Job: $job"
+             done 
