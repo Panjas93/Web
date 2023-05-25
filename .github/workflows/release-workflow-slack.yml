@@ -101,6 +101,6 @@ jobs :
     steps:
       - name: Decide whether the needed jobs succeeded or failed
         run : |
-           echo "----hiii----,${{toJSON(github.event)}}"
+           echo "----hiii----,${{toJSON(github.event.workflow)}}"
         
  
