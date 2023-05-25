@@ -96,6 +96,7 @@ jobs :
          
        - name : Print Jobs
          run : |
-             jobs = (slack_notification_initial)
              
-             echo "--print--${{jobs}}"
+             for job in slack_notification_initial; do
+                echo "Running Job: $job"
+             done  
