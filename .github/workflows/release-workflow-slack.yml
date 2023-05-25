@@ -102,6 +102,5 @@ jobs :
       - name: Decide whether the needed jobs succeeded or failed
         run : |
            echo "Hii"
-        env : 
-          JOBS : ${{needs}}
+        
  
