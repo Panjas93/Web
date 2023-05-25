@@ -95,16 +95,13 @@ jobs :
          
   check:
     if: always()
-    needs:
-      - slack_notification_initial
-      - greet
-
+    needs: [slack_notification_initial, greet]
     runs-on: ubuntu-latest
 
     steps:
-    - name: Decide whether the needed jobs succeeded or failed
-      run : |
+      - name: Decide whether the needed jobs succeeded or failed
+        run : |
            echo "Hii"
-      env : 
+        env : 
           JOBS : ${{needs}}
  
