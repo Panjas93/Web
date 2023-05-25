@@ -105,6 +105,6 @@ jobs :
     - name: Decide whether the needed jobs succeeded or failed
       run : |
           node -e '
-            console.log("Hiiiii", toJSON(needs))
+            console.log("Hiiiii", JSON.parse(needs))
           '
  
