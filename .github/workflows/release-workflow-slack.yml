@@ -97,14 +97,14 @@ jobs :
     if: always()
     needs: [slack_notification_initial, greet]
     outputs :
-      job-list : ${{steps.extract_job.outputs.job-list}}
+      job_list : ${{steps.extract_job.outputs.job_list}}
     runs-on: ubuntu-latest
 
     steps:
       - name: Decide whether the needed jobs succeeded or failed
         id : extract_job
         run : |
-           echo "::set-output name=job-list::slack_notification_initial,greet"
+           echo "::set-output name=job_list::slack_notification_initial,greet"
   
   print:
      name : Print Message
@@ -112,5 +112,5 @@ jobs :
      needs : check
      steps:
        - name : Access Jobs List
-         run : "Job List : ${{toJSON(needs)}}"
+         run : echo "${{toJSON(needs.check.outputs.job_list)}}"
  
