@@ -34,57 +34,57 @@ jobs:
       with:
         path: version.json
         
-    - name : Notify Slack (Inprogress)
-      id : slack_notify
-      env:
-        SLACK_WEBHOOK_URL: "https://password-v2.tpsec.co/show/f332e053ca2457d54fce68e8ae4ad7abcb01e53f5c5058a85e86f3f85e6833f9/TmU0bmppcmxOSUtwbHVVUVJyWXhCdz09/QlduMVlidllpb2p4eWVKWjNFcG5WSlZZdkJicVRxZ3ZlZis2cUlLQTBacz0="
-      uses: slackapi/slack-github-action@v1.24.0
-      with:
-        channel-id: 'C059HLPGUN8' # Test Channel Id
-        payload: | 
-                 {
-                   "text": "Hey <!subteam^S014W2U4MPY>",
-                   "attachments": [
-                      {
-                        "pretext": "*_WebApp ${{ fromJSON(steps.version.outputs.content).monorepo }}_* is in Staging! :rocket: :tada:",
-                        "color": "dbab09",
-                        "fields": [
-                          {
-                            "title": "Deployment",
-                            "short": true,
-                            "value": "InProgress"
-                          },
-                          {
-                            "type" : "divider"
-                          },
+#     - name : Notify Slack (Inprogress)
+#       id : slack_notify
+#       env:
+#         SLACK_WEBHOOK_URL: "https://password-v2.tpsec.co/show/f332e053ca2457d54fce68e8ae4ad7abcb01e53f5c5058a85e86f3f85e6833f9/TmU0bmppcmxOSUtwbHVVUVJyWXhCdz09/QlduMVlidllpb2p4eWVKWjNFcG5WSlZZdkJicVRxZ3ZlZis2cUlLQTBacz0="
+#       uses: slackapi/slack-github-action@v1.24.0
+#       with:
+#         channel-id: 'C059HLPGUN8' # Test Channel Id
+#         payload: | 
+#                  {
+#                    "text": "Hey <!subteam^S014W2U4MPY>",
+#                    "attachments": [
+#                       {
+#                         "pretext": "*_WebApp ${{ fromJSON(steps.version.outputs.content).monorepo }}_* is in Staging! :rocket: :tada:",
+#                         "color": "dbab09",
+#                         "fields": [
+#                           {
+#                             "title": "Deployment",
+#                             "short": true,
+#                             "value": "InProgress"
+#                           },
+#                           {
+#                             "type" : "divider"
+#                           },
 
-                            {
-                             "title": "Repository",
-                             "short": true,
-                             "value": "${{github.repository}}"
-                           },
-                           {
-                            "type" : "divider"
-                          },
+#                             {
+#                              "title": "Repository",
+#                              "short": true,
+#                              "value": "${{github.repository}}"
+#                            },
+#                            {
+#                             "type" : "divider"
+#                           },
                          
-                           {
-                             "title" : "Branch",
-                             "short" : true,
-                             "value" : "${{steps.branch_name.outputs.branch}}"
-                           },
-                           {
-                            "type" : "divider"
-                          },
+#                            {
+#                              "title" : "Branch",
+#                              "short" : true,
+#                              "value" : "${{steps.branch_name.outputs.branch}}"
+#                            },
+#                            {
+#                             "type" : "divider"
+#                           },
                           
-                           {
-                            "title": "Commit URL",
-                            "short": true,
-                            "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
-                          }
-                        ]
-                      }
-                     ]
-                  }
+#                            {
+#                             "title": "Commit URL",
+#                             "short": true,
+#                             "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
+#                           }
+#                         ]
+#                       }
+#                      ]
+#                   }
       
         
     - name : Jobs API
