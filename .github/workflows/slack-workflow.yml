@@ -129,6 +129,7 @@ jobs:
 
         - name : Send Slack Notification (Failure)
           if : ${{github.event.workflow_run.conclusion == 'failure'}}
+          uses : slackapi/slack-github-action@v1.24.0
           env :
              SLACK_BOT_TOKEN : ${{secrets.SLACK_BOT_TOKEN}}
           with : 
