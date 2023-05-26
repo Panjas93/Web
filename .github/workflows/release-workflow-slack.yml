@@ -104,5 +104,5 @@ jobs :
       - name: Decide whether the needed jobs succeeded or failed
         id : extract_job
         run : |
-           echo "https://api.github.com/repos/${{github.repository_owner}}/${{github.repository}}/actions/jobs"
+           echo "https://api.github.com/repos/${{github.repository_owner}}/${{github.repository}}/actions/runs/${{github.run_id}}/jobs"
  
