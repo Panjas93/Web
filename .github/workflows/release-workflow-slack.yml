@@ -87,7 +87,7 @@ jobs :
                      ]
                   }
   greet :
-     name : Print Message
+     name : Greet Message
      runs-on : ubuntu-latest 
      steps : 
        - name : Say Hello
@@ -105,5 +105,12 @@ jobs :
         id : extract_job
         run : |
            echo "::set-output name=job-list::slack_notification_initial,greet"
-        
+  
+  print:
+     name : Print Message
+     runs-on : ubuntu-latest
+     needs : check
+     steps:
+       - name : Access Jobs List
+         run : "Job List : ${{needs.check.outputs.job-list}}"
  
