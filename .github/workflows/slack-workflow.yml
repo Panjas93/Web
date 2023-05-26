@@ -100,7 +100,7 @@ jobs:
                                      {
                                       "title": "Build Version",
                                       "short": true,
-                                      "value": ${{ fromJSON(steps.json_file.outputs.content).monorepo }}
+                                      "value": "${{ fromJSON(steps.json_file.outputs.content).monorepo }}"
                                     },
                                     {
                                       "type" : "divider"
@@ -161,7 +161,7 @@ jobs:
                                 {
                                       "title": "Build Version",
                                       "short": true,
-                                      "value": ${{ fromJSON(steps.json_file.outputs.content).monorepo }}
+                                      "value": "${{ fromJSON(steps.json_file.outputs.content).monorepo }}"
                                  },
                                  {
                                       "type" : "divider"
