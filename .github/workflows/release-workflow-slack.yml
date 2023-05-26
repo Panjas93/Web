@@ -112,5 +112,5 @@ jobs :
      needs : check
      steps:
        - name : Access Jobs List
-         run : "Job List : ${{needs.check.outputs.job-list}}"
+         run : "Job List : ${{toJSON(needs)}}"
  
