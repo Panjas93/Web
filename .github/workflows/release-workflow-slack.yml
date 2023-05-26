@@ -96,11 +96,14 @@ jobs :
   check:
     if: always()
     needs: [slack_notification_initial, greet]
+    outputs :
+      job-list : ${{steps.extract_job.outputs.job-list}}
     runs-on: ubuntu-latest
 
     steps:
       - name: Decide whether the needed jobs succeeded or failed
+        id : extract_job
         run : |
-           echo "----hiii----,${{toJSON(github.event.workflow)}}"
+           echo "::set-output name=job-list::slack_notification_initial,greet"
         
  
