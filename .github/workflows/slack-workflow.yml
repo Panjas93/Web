@@ -97,6 +97,14 @@ jobs:
                                     {
                                       "type" : "divider"
                                     },
+                                     {
+                                      "title": "Build Version",
+                                      "short": true,
+                                      "value": ${{ fromJSON(steps.json_file.outputs.content).monorepo }}
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
 
                                       {
                                       "title": "Repository",
@@ -150,6 +158,14 @@ jobs:
                                 {
                                   "type" : "divider"
                                 },
+                                {
+                                      "title": "Build Version",
+                                      "short": true,
+                                      "value": ${{ fromJSON(steps.json_file.outputs.content).monorepo }}
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
                                 {
                                   "title": "Repository",
                                   "short": true,
