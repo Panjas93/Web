@@ -3,7 +3,7 @@ on:
  push:
    branches:
      - release/*
- jobs: 
+jobs: 
   greet:
     name : Print Message
     runs-on : ubuntu-latest
