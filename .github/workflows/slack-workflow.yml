@@ -68,7 +68,7 @@ jobs:
           if: ${{github.event.workflow_run.conclusion == 'failure'}}
           run: |
               node -e '
-                console.log('------logs--------'process.env.LOGS);
+                console.log("------logs--------"process.env.LOGS);
               '
           env: 
              LOGS : {{steps.request_logs.outputs.logs}}                     
