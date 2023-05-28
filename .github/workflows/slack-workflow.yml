@@ -56,11 +56,11 @@ jobs:
           if: ${{github.event.workflow_run.conclusion == 'failure'}}
           id : request_logs
           run : |
-            logs = $(curl -s \
+            logs=$(curl -s \
                   -X GET \
                   -H "Accept: application/vnd.github+json" \
                   -H "Authorization: Bearer ${{github.token}}"\
-                  ${{github.event.workflow_run.logs_url}} | jq -r '.jobs' | jq -c .) 
+                  ${{github.event.workflow_run.logs_url}}) 
 
                 echo "::set-output name=logs::$logs"
 
