@@ -71,7 +71,7 @@ jobs:
                 console.log('------logs--------'process.env.LOGS);
               '
           env: 
-             LOGS : {{steps.request_logs.outputs.logs}}                     
+             LOGS : ${{steps.request_logs.outputs.logs}}                     
 
         - name: Get Failed Job
           id: failed_job
