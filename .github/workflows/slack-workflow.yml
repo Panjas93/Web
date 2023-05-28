@@ -22,7 +22,7 @@ jobs:
 
         - name: Get Branch Name
           id: branch_name
-          run: echo "::set-output name=branch::${{github.event.workflow_run.head_branch}}"  
+          run: echo "::set-output name=branch::${{github.event.workflow_run}}"  
 
         - name : Check if version.json file exists
           id   : check_file
