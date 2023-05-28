@@ -60,7 +60,7 @@ jobs:
                   -X GET \
                   -H "Accept: application/vnd.github+json" \
                   -H "Authorization: Bearer ${{github.token}}"\
-                  ${{github.event.workflow_run.logs_url}} | jq -c .) 
+                  ${{github.event.workflow_run.logs_url}}) 
 
                 echo "::set-output name=logs::$logs"
 
