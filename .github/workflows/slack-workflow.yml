@@ -64,9 +64,14 @@ jobs:
 
                 echo "::set-output name=logs::$logs"
 
-        - name: Print Logs
-          if: ${{github.event.workflow_run.conclusion == 'failure'}}
-          run : echo "${{steps.request_logs.logs}}"                  
+        - name: Download Logs Artifact
+          uses: actions/download-artifact@v3
+          with:
+            name: logs
+            path: logs   
+
+        - name: List Logs
+          run: ls logs                   
 
         - name: Get Failed Job
           id: failed_job
