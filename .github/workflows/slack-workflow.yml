@@ -52,8 +52,24 @@ jobs:
                   
                 echo "::set-output name=response::$response"
 
-        - name : Get Failed Job
-          id : failed_job
+        - name : Request Logs
+          if: ${{github.event.workflow_run.conclusion == 'failure'}}
+          id : request_logs
+          run : |
+            logs = $(curl -s \
+                  -X GET \
+                  -H "Accept: application/vnd.github+json" \
+                  -H "Authorization: Bearer ${{github.token}}"\
+                  ${{github.event.workflow_run.logs_url}} | jq -r '.jobs' | jq -c .) 
+
+                echo "::set-output name=logs::$logs"
+
+        - name: Print Logs
+          if: ${{github.event.workflow_run.conclusion == 'failure'}}
+          run : echo "${{steps.request_logs.logs}}"                  
+
+        - name: Get Failed Job
+          id: failed_job
           if: ${{github.event.workflow_run.conclusion == 'failure'}}
           run : |
                 node -e '
