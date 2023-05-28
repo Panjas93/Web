@@ -10,5 +10,5 @@ jobs:
     
     steps : 
       - name : Say Hello
-        run: echo "Success"
+        run: echo "${GITHUB_REF#refs/heads/}"
        
