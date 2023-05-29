@@ -1,35 +1,84 @@
-name: Slack Pre Deployment Notification Workflow
-on:
-  workflow_run: 
-     workflows : ['Release Workflow']
-     types:
-       - in_progress
-
-jobs:
-
-  Slack_notification:
-     runs-on: ubuntu-latest
-     name: Notify Slack
-
-     steps:
-       - name: Pre Slack Notification
-         run: echo "Pre Notification"
-
-
-
-name: Slack Post Deployment Notification Workflow
+name: Slack Notification Workflow
 on: 
    workflow_run: 
      workflows : ['Release Workflow']
      types:
+       - in_progress
        - completed
 
 
 jobs:
 
-  slack_notification:
+  slack_pre_notification:
+     runs-on: ubuntu-latest
+     name: Notify Slack (Pre) 
+     steps:
+        - name : Send Slack Notification (InProgress)
+          env : 
+             SLACK_BOT_TOKEN : ${{secrets.SLACK_BOT_TOKEN}}
+          uses : slackapi/slack-github-action@v1.24.0
+          with : 
+               channel-id : 'C058W67M0SC' # ID of Slack Channel
+               payload : |
+                        {
+                          "text" : "Hey <!subteam^S014W2U4MPY>",
+                          "attachments" : [
+                            {
+                              "pretext": "*_WebApp ${{ fromJSON(steps.json_file.outputs.content).monorepo }}_* is in Staging! :rocket: :tada:",
+                              "color": "28a745",
+                              "fields": [
+                                    {
+                                      "title": "Deployment",
+                                      "short": true,
+                                      "value": "InProgress"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+                                     {
+                                      "title": "Build Version",
+                                      "short": true,
+                                      "value": "${{ fromJSON(steps.json_file.outputs.content).monorepo }}"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+
+                                      {
+                                      "title": "Repository",
+                                      "short": true,
+                                      "value": "${{github.repository}}"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+                                  
+                                    {
+                                      "title" : "Branch",
+                                      "short" : true,
+                                      "value" : "${{steps.branch_name.outputs.branch}}"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+                                    
+                                    {
+                                      "title": "Commit URL",
+                                      "short": true,
+                                      "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
+                                    }
+
+                              ]
+                            }
+                          ]
+                        }
+
+          
+      
+  slack_post_notification:
     runs-on: ubuntu-latest
-    name: Notify Slack
+    name: Notify Slack (Post)
+    if : ${{github.event.workflow_run.status === 'completed'}}
     permissions:
          actions : write
     steps:   
