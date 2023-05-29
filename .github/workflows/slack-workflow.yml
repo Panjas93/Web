@@ -103,7 +103,7 @@ jobs:
 
         - name : Create Slack TS JSON
           run : | 
-                echo '${{toJSON(steps.slack_id.outputs)}}' > slack.json
+                echo '${{steps.slack_id.outputs | jq -c .}}' > slack.json
                 
         - name : Save Slack TS JSON
           uses: actions/upload-artifact@v3
