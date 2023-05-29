@@ -144,6 +144,7 @@ jobs:
               
         - name: Download Artifacts
           id: download_slack_artifacts
+          uses: actions/download-artifact@v3
           with: 
              name: slack-artifact
              path : slack.json
