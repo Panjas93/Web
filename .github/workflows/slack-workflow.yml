@@ -121,7 +121,7 @@ jobs:
         - name : Save Slack TS JSON
           uses: actions/upload-artifact@v3
           with:
-            name: json-artifact
+            name: slack-artifact
             path: slack.json
 
           
@@ -154,6 +154,18 @@ jobs:
           uses : juliangruber/read-file-action@v1
           with : 
               path : version.json
+              
+        - name: Download Artifacts
+          id: download_slack_artifacts
+          uses: actions/download-artifact@v3
+          with: 
+             name: slack-artifact
+             path : slack.json
+             
+        - name : Print Artifacts
+          run: |
+            echo "${{toJSON(steps.download_slack_artifacts.outputs)}}"
+          
 
         - name : Request Workflow Jobs
           if: ${{github.event.workflow_run.conclusion == 'failure'}}
