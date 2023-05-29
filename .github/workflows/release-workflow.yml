@@ -10,5 +10,5 @@ jobs:
     
     steps : 
       - name : Say Hello
-        run: echo "Test"
+        run: exit 1
        
