@@ -11,7 +11,8 @@ jobs:
 
   slack_pre_notification:
      runs-on: ubuntu-latest
-     name: Notify Slack (Pre) 
+     name: Notify Slack (Pre)
+     if : ${{github.event.workflow_run.status == 'in_progress'}}
      steps:
         - name : Send Slack Notification (InProgress)
           env : 
@@ -78,7 +79,7 @@ jobs:
   slack_post_notification:
     runs-on: ubuntu-latest
     name: Notify Slack (Post)
-    if : ${{github.event.workflow_run.status === 'completed'}}
+    if : ${{github.event.workflow_run.status == 'completed'}}
     permissions:
          actions : write
     steps:   
