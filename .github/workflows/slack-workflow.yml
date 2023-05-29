@@ -26,7 +26,7 @@ jobs:
                           "attachments" : [
                             {
                               "pretext": "*_WebApp ${{ fromJSON(steps.json_file.outputs.content).monorepo }}_* is in Staging! :rocket: :tada:",
-                              "color": "28a745",
+                              "color": "dbab09",
                               "fields": [
                                     {
                                       "title": "Deployment",
