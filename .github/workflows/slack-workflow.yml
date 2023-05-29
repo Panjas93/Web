@@ -160,7 +160,6 @@ jobs:
           uses: actions/download-artifact@v3
           with: 
              name: slack-artifact
-             path : slack.json
              
         - name : Print Artifacts
           run: |
