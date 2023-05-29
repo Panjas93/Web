@@ -9,6 +9,6 @@ jobs:
     runs-on : ubuntu-latest
     
     steps : 
-      - name : Say Hello
+      - name : Say Hellow
         run: exit 1
        
