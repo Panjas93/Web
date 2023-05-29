@@ -38,10 +38,11 @@ jobs:
           uses : juliangruber/read-file-action@v1
           with : 
               path : version.json  
-
+                       
         - name: Send Slack Notification (InProgress)
-          uses : slackapi/slack-github-action@v1.24.0
-          env :
+          id: slack_id
+          uses: slackapi/slack-github-action@v1.24.0
+          env:
              SLACK_BOT_TOKEN : ${{secrets.SLACK_BOT_TOKEN}}
           with:
              channel-id : 'C058W67M0SC' # ID of Slack Channel
@@ -100,7 +101,15 @@ jobs:
                         }
 
 
-             
+        - name : Create Slack TS JSON
+          run : | 
+                echo '{"slackTS": ${{toJSON(steps.slack_id.outputs).ts}}' > slack.json
+                
+        - name : Save Slack TS JSON
+          uses: actions/upload-artifact@v3
+          with:
+            name: json-artifact
+            path: data.json
 
           
   slack_post_notification:
