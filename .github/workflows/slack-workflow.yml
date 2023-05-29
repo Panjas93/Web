@@ -108,11 +108,15 @@ jobs:
 =======
           run : | 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 echo "${{steps.slack_id.outputs}}" | jq '.' > slack.json
 >>>>>>> e81d593b06185db3e84c38e2bbe8396b16f2852a
 =======
                 echo '${{steps.slack_id.outputs}}' | jq '.' > slack.json
 >>>>>>> fafd7139f08a00756cb7da611830640def6ab175
+=======
+                echo '${{steps.slack_id.outputs}}' > slack.json
+>>>>>>> ee616b80b23f97be329e28e52b79391fa43f7433
                 
         - name : Save Slack TS JSON
           uses: actions/upload-artifact@v3
