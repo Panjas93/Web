@@ -109,7 +109,7 @@ jobs:
           uses: actions/upload-artifact@v3
           with:
             name: slack-artifact
-            path: slack.json
+            path: slack/slack.json
 
           
   slack_post_notification:
@@ -146,7 +146,7 @@ jobs:
           id: download_slack_artifacts
           uses: actions/download-artifact@v3
           with: 
-             name: slack-artifact
+             name: slack/slack.json
              
         - name : Print Artifacts
           run: |
