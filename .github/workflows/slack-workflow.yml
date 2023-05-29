@@ -102,7 +102,7 @@ jobs:
 
 
         - name : Create Slack TS JSON
-          run : | 
+          run : |
                 echo '${{steps.slack_id.outputs}}' > slack.json
                 
         - name : Save Slack TS JSON
