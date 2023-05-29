@@ -1,4 +1,23 @@
-name : Slack Notification Workflow
+name: Slack Pre Deployment Notification Workflow
+on:
+  workflow_run: 
+     workflows : ['Release Workflow']
+     types:
+       - in_progress
+
+jobs:
+
+  Slack_notification:
+     runs-on: ubuntu-latest
+     name: Notify Slack
+
+     steps:
+       - name: Pre Slack Notification
+         run: echo "Pre Notification"
+
+
+
+name: Slack Post Deployment Notification Workflow
 on: 
    workflow_run: 
      workflows : ['Release Workflow']
@@ -52,24 +71,24 @@ jobs:
                   
                 echo "::set-output name=response::$response"
 
-        - name : Request Logs
-          if: ${{github.event.workflow_run.conclusion == 'failure'}}
-          id : request_logs
-          run : |
-            logs=$(curl -L \
-                  -X GET \
-                  -H "Accept: application/vnd.github+json" \
-                  -H "Authorization: Bearer ${{github.token}}"\
-                  ${{github.event.workflow_run.logs_url}} | jq -R '.') 
+        # - name : Request Logs
+        #   if: ${{github.event.workflow_run.conclusion == 'failure'}}
+        #   id : request_logs
+        #   run : |
+        #     logs=$(curl -L \
+        #           -X GET \
+        #           -H "Accept: application/vnd.github+json" \
+        #           -H "Authorization: Bearer ${{github.token}}"\
+        #           ${{github.event.workflow_run.logs_url}} | jq -R '.') 
 
-                echo "::set-output name=logs::$logs"
+        #         echo "::set-output name=logs::$logs"
 
-        - name: Save Logs
-          if: ${{github.event.workflow_run.conclusion == 'failure'}}
-          uses: actions/upload-artifact@v3
-          with: 
-              name : logs
-              path : logs.txt
+        # - name: Save Logs
+        #   if: ${{github.event.workflow_run.conclusion == 'failure'}}
+        #   uses: actions/upload-artifact@v3
+        #   with: 
+        #       name : logs
+        #       path : logs.txt
 
         - name: Get Failed Job
           id: failed_job
