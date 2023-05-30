@@ -15,29 +15,7 @@ jobs:
          actions: write
          contents: read
     steps:   
-        - name : Github Checkout Repository
-          uses : actions/checkout@v3
-          with : 
-             fetch-depth : 0
-             ref : ${{github.sha}}
 
-        - name: Get Branch Name
-          id: branch_name
-          run: echo "::set-output name=branch::${{github.event.workflow_run.head_branch}}"   
-
-        - name : Check if version.json file exists
-          id: check_file
-          uses : andstor/file-existence-action@v2
-          with : 
-             files : "version.json"
-
-        - name : Read version.json
-          id : json_file
-          if : steps.check_file.outputs.files_exists == 'true'
-          uses : juliangruber/read-file-action@v1
-          with : 
-              path : version.json
-              
         - name: Download Artifacts
           id: download_slack_artifacts
           uses: dawidd6/action-download-artifact@v2
@@ -140,43 +118,7 @@ jobs:
                                       "title": "Deployment",
                                       "short": true,
                                       "value": "Success"
-                                    },
-                                    {
-                                      "type" : "divider"
-                                    },
-                                     {
-                                      "title": "Build Version",
-                                      "short": true,
-                                      "value": "${{ fromJSON(steps.json_file.outputs.content).monorepo }}"
-                                    },
-                                    {
-                                      "type" : "divider"
-                                    },
-
-                                      {
-                                      "title": "Repository",
-                                      "short": true,
-                                      "value": "${{github.repository}}"
-                                    },
-                                    {
-                                      "type" : "divider"
-                                    },
-                                  
-                                    {
-                                      "title" : "Branch",
-                                      "short" : true,
-                                      "value" : "${{steps.branch_name.outputs.branch}}"
-                                    },
-                                    {
-                                      "type" : "divider"
-                                    },
-                                    
-                                    {
-                                      "title": "Commit URL",
-                                      "short": true,
-                                      "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
                                     }
-
                               ]
                             }
                           ]
