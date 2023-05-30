@@ -49,7 +49,7 @@ jobs:
              
         - name : Print Artifacts
           run: |
-            echo "${{toJSON(steps.download_slack_artifacts.outputs)}}"
+            echo "${{toJSON(steps.download_slack_artifacts.outputs.inflating)}}"
           
 
         - name : Request Workflow Jobs
