@@ -1,7 +1,7 @@
 name: Slack Post Deployment Notification Workflow
 on: 
    workflow_run: 
-     workflows : ['Release Workflow']
+     workflows : ['Release Workflow', 'Test Workflow']
      types:
        - completed
 
