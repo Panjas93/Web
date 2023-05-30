@@ -47,16 +47,19 @@ jobs:
              workflow_conclusion: success
              name: slack-artifact
 
+        - name : Check if Slack JSON exists
+          id   : check_file
+          uses : andstor/file-existence-action@v2
+          with : 
+             files : "slack.json"     
 
-        - name : Read version.json
+
+        - name : Read Slack JSON
+          if : steps.check_file.outputs.files_exists == 'true'
           id : slack_json
           uses : juliangruber/read-file-action@v1
           with : 
               path : slack.json     
-             
-        - name : Print TS
-          run : |
-                echo "${{fromJSON(steps.slack_json.outputs.content).ts }}" 
 
         - name : Request Workflow Jobs
           if: ${{github.event.workflow_run.conclusion == 'failure'}}
@@ -124,6 +127,7 @@ jobs:
           uses : slackapi/slack-github-action@v1.24.0
           with : 
                channel-id : 'C058W67M0SC' # ID of Slack Channel
+               update-ts : ${{fromJSON(steps.slack_json.outputs.content).ts}}
                payload : |
                         {
                           "text" : "Hey <!subteam^S014W2U4MPY>",
