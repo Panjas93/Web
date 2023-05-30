@@ -51,7 +51,7 @@ jobs:
           id: slack_json
           run: |
               FILE_PATH="./slack.json"
-              JSON_CONTENT=$(cat "$FILE_PATH" | jq '.')
+              JSON_CONTENT=$(cat "$FILE_PATH")
               echo "::set-output name=slack::$JSON_CONTENT"
         - name : Print TS
           run : |
