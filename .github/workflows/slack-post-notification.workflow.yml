@@ -133,7 +133,7 @@ jobs:
                           "text" : "Hey <!subteam^S014W2U4MPY>",
                           "attachments" : [
                             {
-                              "pretext": "*_WebApp ${{ fromJSON(steps.json_file.outputs.content).monorepo }}_* is in Staging! :rocket: :tada:",
+                              "pretext": "*_WebApp ${{ fromJSON(steps.json_file.outputs.content).monorepo }}_* is deployed successfully! :rocket: :tada:",
                               "color": "28a745",
                               "fields": [
                                     {
