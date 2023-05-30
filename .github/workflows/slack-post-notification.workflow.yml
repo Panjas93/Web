@@ -47,9 +47,11 @@ jobs:
              workflow_conclusion: success
              name: slack-artifact
              
-        - name : Print Artifacts
+        - name : Read Slack JSON
           run: |
-            echo "cat slack.json"
+              FILE_PATH="./slack.json"
+              JSON_CONTENT=$(cat "$FILE_PATH" | jq '.')
+              echo "$JSON_CONTENT"
           
 
         - name : Request Workflow Jobs
