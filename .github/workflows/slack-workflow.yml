@@ -106,10 +106,10 @@ jobs:
                 echo '${{steps.slack_id.outputs}}' > slack.json
                 
         - name : Save Slack TS JSON
-          uses: actions/upload-artifact@v3
+          uses: actions/upload-artifact@v2
           with:
             name: slack-artifact
-            path: slack/slack.json
+            path: slack.json
 
           
   slack_post_notification:
@@ -144,9 +144,9 @@ jobs:
               
         - name: Download Artifacts
           id: download_slack_artifacts
-          uses: actions/download-artifact@v3
+          uses: actions/download-artifact@v2
           with: 
-             name: slack/slack.json
+             name: slack-artifact
              
         - name : Print Artifacts
           run: |
