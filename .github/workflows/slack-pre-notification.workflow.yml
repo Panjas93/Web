@@ -1,7 +1,7 @@
 name: Slack Deployment Pre Notification Workflow
 on: 
    workflow_run: 
-     workflows : ['Release Workflow', 'Test Workflow']
+     workflows : ['Release Workflow']
      types:
        - requested
 
