@@ -121,7 +121,7 @@ jobs:
                 
 
         - name : Send Slack Notification (Success) 
-          if : ${{ github.event.workflow_run.conclusion == 'success' }}
+          if : ${{ true}}
           env : 
              SLACK_BOT_TOKEN : ${{secrets.SLACK_BOT_TOKEN}}
           uses : slackapi/slack-github-action@v1.24.0
