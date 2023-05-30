@@ -131,13 +131,53 @@ jobs:
                payload : |
                         {
                           "text" : "Hey <!subteam^S014W2U4MPY>",
-                          "blocks": [
+                          "attachments" : [
                             {
-                              "type": "section",
-                              "text": {
-                                "type": "mrkdwn",
-                                "text": "Github Action build result: ${{github.event.head_commit.url}}"
-                              }
+                              "pretext": "*_WebApp ${{ fromJSON(steps.json_file.outputs.content).monorepo }}_* is in Staging! :rocket: :tada:",
+                              "color": "28a745",
+                              "fields": [
+                                    {
+                                      "title": "Deployment",
+                                      "short": true,
+                                      "value": "Success"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+                                     {
+                                      "title": "Build Version",
+                                      "short": true,
+                                      "value": "${{ fromJSON(steps.json_file.outputs.content).monorepo }}"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+
+                                      {
+                                      "title": "Repository",
+                                      "short": true,
+                                      "value": "${{github.repository}}"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+                                  
+                                    {
+                                      "title" : "Branch",
+                                      "short" : true,
+                                      "value" : "${{steps.branch_name.outputs.branch}}"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+                                    
+                                    {
+                                      "title": "Commit URL",
+                                      "short": true,
+                                      "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
+                                    }
+
+                              ]
                             }
                           ]
                         }
