@@ -15,7 +15,29 @@ jobs:
          actions: write
          contents: read
     steps:   
-     
+        - name : Github Checkout Repository
+          uses : actions/checkout@v3
+          with : 
+             fetch-depth : 0
+             ref : ${{github.sha}}
+
+        - name: Get Branch Name
+          id: branch_name
+          run: echo "::set-output name=branch::${{github.event.workflow_run.head_branch}}"   
+
+        - name : Check if version.json file exists
+          id: check_file
+          uses : andstor/file-existence-action@v2
+          with : 
+             files : "version.json"
+
+        - name : Read version.json
+          id : json_file
+          if : steps.check_file.outputs.files_exists == 'true'
+          uses : juliangruber/read-file-action@v1
+          with : 
+              path : version.json
+              
         - name: Download Artifacts
           id: download_slack_artifacts
           uses: dawidd6/action-download-artifact@v2
@@ -109,53 +131,13 @@ jobs:
                payload : |
                         {
                           "text" : "Hey <!subteam^S014W2U4MPY>",
-                          "attachments" : [
+                          "blocks": [
                             {
-                              "pretext": "*_WebApp ${{ fromJSON(steps.json_file.outputs.content).monorepo }}_* is in Staging! :rocket: :tada:",
-                              "color": "28a745",
-                              "fields": [
-                                    {
-                                      "title": "Deployment",
-                                      "short": true,
-                                      "value": "Success"
-                                    },
-                                    {
-                                      "type" : "divider"
-                                    },
-                                     {
-                                      "title": "Build Version",
-                                      "short": true,
-                                      "value": "${{ fromJSON(steps.json_file.outputs.content).monorepo }}"
-                                    },
-                                    {
-                                      "type" : "divider"
-                                    },
-
-                                      {
-                                      "title": "Repository",
-                                      "short": true,
-                                      "value": "${{github.repository}}"
-                                    },
-                                    {
-                                      "type" : "divider"
-                                    },
-                                  
-                                    {
-                                      "title" : "Branch",
-                                      "short" : true,
-                                      "value" : "${{steps.branch_name.outputs.branch}}"
-                                    },
-                                    {
-                                      "type" : "divider"
-                                    },
-                                    
-                                    {
-                                      "title": "Commit URL",
-                                      "short": true,
-                                      "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
-                                    }
-
-                              ]
+                              "type": "section",
+                              "text": {
+                                "type": "mrkdwn",
+                                "text": "Github Action build result: ${{github.event.head_commit.url}}"
+                              }
                             }
                           ]
                         }
@@ -180,7 +162,55 @@ jobs:
                                   "title": "Deployment",
                                   "short": true,
                                   "value": "Failed"
-                                }
+                                },
+                                {
+                                  "type" : "divider"
+                                },
+                                {
+                                      "title": "Build Version",
+                                      "short": true,
+                                      "value": "${{ fromJSON(steps.json_file.outputs.content).monorepo }}"
+                                 },
+                                 {
+                                      "type" : "divider"
+                                },
+                                {
+                                  "title": "Repository",
+                                  "short": true,
+                                  "value": "${{github.repository}}"
+                                },
+                                {
+                                  "type" : "divider"
+                                },
+                                {
+                                  "title" : "Branch",
+                                  "short" : true,
+                                  "value" : "${{steps.branch_name.outputs.branch}}"
+                                },
+                                {
+                                  "type" : "divider"
+                                },
+                                {
+                                  "title" : "Failed Step",
+                                  "short" : true,
+                                  "value" : "${{fromJSON(steps.failed_job.outputs.failed_job).step}}"
+                                },
+                                  {
+                                  "type" : "divider"
+                                },
+                                {
+                                  "title": "Failed Job URL",
+                                  "short": true,
+                                  "value": "${{fromJSON(steps.failed_job.outputs.failed_job).link}}"
+                                },
+                                {
+                                  "type" : "divider"
+                                },
+                                {
+                                      "title": "Commit URL",
+                                      "short": true,
+                                      "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
+                                    }
                             ]
                            }
                           ]
