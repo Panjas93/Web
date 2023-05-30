@@ -15,7 +15,7 @@ jobs:
          actions: write
          contents: read
     steps:   
-
+     
         - name: Download Artifacts
           id: download_slack_artifacts
           uses: dawidd6/action-download-artifact@v2
@@ -118,7 +118,43 @@ jobs:
                                       "title": "Deployment",
                                       "short": true,
                                       "value": "Success"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+                                     {
+                                      "title": "Build Version",
+                                      "short": true,
+                                      "value": "${{ fromJSON(steps.json_file.outputs.content).monorepo }}"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+
+                                      {
+                                      "title": "Repository",
+                                      "short": true,
+                                      "value": "${{github.repository}}"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+                                  
+                                    {
+                                      "title" : "Branch",
+                                      "short" : true,
+                                      "value" : "${{steps.branch_name.outputs.branch}}"
+                                    },
+                                    {
+                                      "type" : "divider"
+                                    },
+                                    
+                                    {
+                                      "title": "Commit URL",
+                                      "short": true,
+                                      "value": "https://github.com/${{github.repository}}/commit/${{github.sha}}"
                                     }
+
                               ]
                             }
                           ]
@@ -131,6 +167,7 @@ jobs:
              SLACK_BOT_TOKEN : ${{secrets.SLACK_BOT_TOKEN}}
           with : 
                channel-id : 'C058W67M0SC' # ID of Slack Channel
+               update-ts : ${{fromJSON(steps.slack_json.outputs.content).ts}}
                payload : |
                         {
                           "text" : "Hey <!subteam^S014W2U4MPY>",
@@ -143,46 +180,6 @@ jobs:
                                   "title": "Deployment",
                                   "short": true,
                                   "value": "Failed"
-                                },
-                                {
-                                  "type" : "divider"
-                                },
-                                {
-                                      "title": "Build Version",
-                                      "short": true,
-                                      "value": "${{ fromJSON(steps.json_file.outputs.content).monorepo }}"
-                                 },
-                                 {
-                                      "type" : "divider"
-                                },
-                                {
-                                  "title": "Repository",
-                                  "short": true,
-                                  "value": "${{github.repository}}"
-                                },
-                                {
-                                  "type" : "divider"
-                                },
-                                {
-                                  "title" : "Branch",
-                                  "short" : true,
-                                  "value" : "${{steps.branch_name.outputs.branch}}"
-                                },
-                                {
-                                  "type" : "divider"
-                                },
-                                {
-                                  "title" : "Failed Step",
-                                  "short" : true,
-                                  "value" : "${{fromJSON(steps.failed_job.outputs.failed_job).step}}"
-                                },
-                                  {
-                                  "type" : "divider"
-                                },
-                                {
-                                  "title": "Failed Job URL",
-                                  "short": true,
-                                  "value": "${{fromJSON(steps.failed_job.outputs.failed_job).link}}"
                                 }
                             ]
                            }
