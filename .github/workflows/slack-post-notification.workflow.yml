@@ -13,7 +13,8 @@ jobs:
     name: Notify Slack (Post)
     if : ${{github.event.workflow_run.status == 'completed'}}
     permissions:
-         actions : write
+         actions: write
+         contents: read
     steps:   
         - name : Github Checkout Repository
           uses : actions/checkout@v3
@@ -40,8 +41,11 @@ jobs:
               
         - name: Download Artifacts
           id: download_slack_artifacts
-          uses: actions/download-artifact@v2
+          uses: dawidd6/action-download-artifact@v2
           with: 
+             github_token: ${{github.token}}
+             workflow: slack-pre-notification.workflow.yml
+             workflow_conclusion: success
              name: slack-artifact
              
         - name : Print Artifacts
