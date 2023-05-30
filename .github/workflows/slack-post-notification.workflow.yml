@@ -26,7 +26,7 @@ jobs:
           run: echo "::set-output name=branch::${{github.event.workflow_run.head_branch}}"   
 
         - name : Check if version.json file exists
-          id   : check_file
+          id: check_file
           uses : andstor/file-existence-action@v2
           with : 
              files : "version.json"
@@ -48,14 +48,14 @@ jobs:
              name: slack-artifact
 
         - name : Check if Slack JSON exists
-          id   : check_file
+          id: check_slack_json_file
           uses : andstor/file-existence-action@v2
           with : 
              files : "slack.json"     
 
 
         - name : Read Slack JSON
-          if : steps.check_file.outputs.files_exists == 'true'
+          if : steps.check_slack_json_file.outputs.files_exists == 'true'
           id : slack_json
           uses : juliangruber/read-file-action@v1
           with : 
