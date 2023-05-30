@@ -52,10 +52,10 @@ jobs:
           run: |
               FILE_PATH="./slack.json"
               JSON_CONTENT=$(cat "$FILE_PATH" | jq '.')
-              echo "$JSON_CONTENT"
+              echo "::set-output name=slack::$JSON_CONTENT"
         - name : Print TS
           run : |
-                echo "${{toJSON(steps.slack_json.outputs).ts}}" 
+                echo "${{toJSON(steps.slack_json.outputs.slack).ts}}" 
 
         - name : Request Workflow Jobs
           if: ${{github.event.workflow_run.conclusion == 'failure'}}
