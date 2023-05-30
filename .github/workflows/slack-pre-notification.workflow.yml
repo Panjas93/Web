@@ -3,7 +3,7 @@ on:
    workflow_run: 
      workflows : ['Release Workflow']
      types:
-       - in_progress
+       - requested
 
 
 jobs:
