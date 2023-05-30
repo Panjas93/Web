@@ -46,16 +46,17 @@ jobs:
              workflow: slack-pre-notification.workflow.yml
              workflow_conclusion: success
              name: slack-artifact
+
+
+        - name : Read version.json
+          id : slack_json
+          uses : juliangruber/read-file-action@v1
+          with : 
+              path : slack.json     
              
-        - name : Read Slack JSON
-          id: slack_json
-          run: |
-              FILE_PATH="./slack.json"
-              JSON_CONTENT=$(cat "$FILE_PATH" | jq -c .)
-              echo "::set-output name=slack::$JSON_CONTENT"
         - name : Print TS
           run : |
-                echo "${{toJSON(steps.slack_json.outputs)}}" 
+                echo "${{fromJSON(steps.slack_json.outputs.content).ts }}" 
 
         - name : Request Workflow Jobs
           if: ${{github.event.workflow_run.conclusion == 'failure'}}
